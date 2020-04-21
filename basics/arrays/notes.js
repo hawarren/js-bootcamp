@@ -7,3 +7,10 @@ notes.unshift('My first note') // adds entry to beginning of the array
 notes.splice(1,1,'this is the new second item')
 console.log(notes.length)
 console.log(notes)
+
+console.log(`You have ${notes.length} todos!`)
+//forEach is a callback function, it takes the item and the index
+notes.forEach(function (item, index)
+{
+    console.log(`Position ${index + 1}. is ${item}`)
+});
