@@ -48,3 +48,15 @@ const find2 = function (notes, noteTitle) {
         return note.title === noteTitle
     })
 }
+const findNotes = function(notes, query){
+
+}
+notes.filter(function(notes, noteTitle){
+return notes.filter(function(note, index){
+    const isTitleMatch= note.title.toLowerCase().includes(query.toLowerCase())
+    const isBodyMatch = note.body.toLowerCase().includes(query.toLowerCase())
+    return isTitleMatch || isBodyMatch
+})
+})
+
+console.log(filteredNotes)

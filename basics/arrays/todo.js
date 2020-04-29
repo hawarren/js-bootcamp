@@ -3,11 +3,11 @@
 //delete the 3rd item
 //add a new item onto the end
 //Remove the first item from the list
-let todos = [{ title: 'Wake up in the morning', isDone : false }
-    , { title: ' Exercise for 10 minutes', isDone : true }
+let todos = [{ title: 'Wake up in the morning', isDone : true }
+    , { title: ' Exercise for 10 minutes', isDone : false }
     , { title: 'eat a healthy breakfast', isDone : true }
-    , { title: 'shower and brush teeth', isDone : true }
-    , { title: 'buy food', isDone : true }
+    , { title: 'shower and brush teeth', isDone : false }
+    , { title: 'buy food', isDone : false }
     , { title: 'get dressed for success', isDone : true }
 ]
 console.log(`You have ${todos.length} things on your menu today. Here\'s the original list`)
@@ -37,7 +37,24 @@ let deleteTodo = function (list, stringToMatch) {
         console.log(`\'${stringToMatch}\` is nowhere to be found`)
     }
 }
-console.log('Now let us remove the eat a healthy breakfast item')
-deleteTodo(todos, 'dont eat a healthy breakfast')
-deleteTodo(todos, 'eat a healthy breakfast')
+// console.log('Now let us remove the eat a healthy breakfast item')
+// deleteTodo(todos, 'dont eat a healthy breakfast')
+// deleteTodo(todos, 'eat a healthy breakfast')
 //console.log(todos)
+//challenge: Create a filtered list that removes the  completed items
+const filteredTodoList = function (notes){
+    return notes.filter(function(note, index){
+        //const isComplete = note.isDone.toLowerCase().trim().includes('false')
+        return !note.isDone
+        //return isComplete
+    })
+}
+const doneList = function(notes){
+    return notes.filter(function(note, index){
+        return note.isDone
+    })
+}
+console.log('Here are your incomplete tasks')
+console.log(filteredTodoList(todos))
+console.log('Here is what you have already done')
+console.log(doneList(todos))
