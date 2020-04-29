@@ -24,7 +24,7 @@ console.log(todos)
 let deleteTodo = function (list, stringToMatch) {
 
    const indexItemToRemove = list.findIndex(function (item, index) {
-        return item.title.trim().toLowerCase() === stringToMatch.trim().toLowerCase()
+        return item.title.toLowerCase() === stringToMatch.toLowerCase()
     }
     )
     if (indexItemToRemove > -1)
@@ -34,10 +34,9 @@ let deleteTodo = function (list, stringToMatch) {
         console.log(list)
     }
     else{
-        console.log(`\'${stringToMatch}\` is nowhere to be found`)
+        console.log('Item is nowhere to be found')
     }
 }
 console.log('Now let us remove the eat a healthy breakfast item')
 deleteTodo(todos, 'dont eat a healthy breakfast')
-deleteTodo(todos, 'eat a healthy breakfast')
 //console.log(todos)
