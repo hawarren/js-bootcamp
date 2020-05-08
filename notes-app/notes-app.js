@@ -9,6 +9,6 @@ ps.forEach(r => {
     //console.log(p.textContent)
     //p.remove();
 });
-document.querySelector('button').addEventListener('click',function(event){
+document.querySelector('#create-note').addEventListener('click',function(event){
     event.target.textContent = 'This button was clicked'
 })

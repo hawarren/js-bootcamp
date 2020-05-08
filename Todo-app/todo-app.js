@@ -12,6 +12,7 @@ let todos = [{ title: 'Wake up in the morning', isDone: true }
 //challenge 53
 //Add button with some text "something like 'add todo'"
 //print message to console on click
+//challenge 54 use id attribute to change button text
 const itemsLeft = todos.filter(function (item) {
     return item.isDone //== 'false'
 })
@@ -26,6 +27,6 @@ itemsLeft.forEach(function (item) {
     itemToAdd.textContent = item.title
     document.querySelector('body').appendChild(itemToAdd)
 })
-document.querySelector('button').addEventListener('click', item => {
+document.querySelector('#create-todo').addEventListener('click', item => {
     console.log('Item added to Todo List')
 })
