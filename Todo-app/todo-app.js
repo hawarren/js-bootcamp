@@ -18,7 +18,20 @@ const itemsLeft = todos.filter(function (item) {
 })
 //create a header for our summary
 const summary = document.createElement('h2')
+const filters = {
+    searchText:''
+}
+const renderNotes = function (notes, filters){
+    const filteredNotes = notes.filter(function(note){
+        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+    })
+    filteredNotes.forEach(function(note){
+        const noteEl = document.createElement('p')
+        noteEl.textContent = note.title
 
+    })
+}
+renderNotes(notes, filters)
 summary.textContent = `You have ${itemsLeft.length} things to do`
 document.querySelector('body').appendChild(summary)
 //add a paragraph for each filter item
@@ -33,4 +46,6 @@ document.querySelector('#create-todo').addEventListener('click', item => {
 document.querySelector('#todo-text').addEventListener('input', item => function (e)
 {
     console.log(e.target.value)
+    filters.searchText = e.target.value
+    renderNotes(notes, filter)
 })
