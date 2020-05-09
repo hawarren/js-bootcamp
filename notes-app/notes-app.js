@@ -12,3 +12,12 @@ ps.forEach(r => {
 document.querySelector('#create-note').addEventListener('click',function(event){
     event.target.textContent = 'This button was clicked'
 })
+document.querySelector('#remove-all').addEventListener('click', function (){
+    document.querySelectorAll('.note').forEach(function (note){
+        note.remove()
+    })
+
+})
+document.querySelector('#search-text').addEventListener('input', function (e){
+    console.log(e.target.value)
+})

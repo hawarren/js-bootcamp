@@ -5,3 +5,9 @@ challenge video 51 part 1
 Challenge video 51 part 2
 1. Create and linke a javascript file
 2.Remove all p tags that have "the"
+
+Challenge 54 (12:10)
+Add an id to the todo button and target it instead of the tag name
+
+Challenge 55:
+add an input field and add an eventlistener for the input eventlistener add placeholder

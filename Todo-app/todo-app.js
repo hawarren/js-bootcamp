@@ -30,3 +30,7 @@ itemsLeft.forEach(function (item) {
 document.querySelector('#create-todo').addEventListener('click', item => {
     console.log('Item added to Todo List')
 })
+document.querySelector('#todo-text').addEventListener('input', item => function (e)
+{
+    console.log(e.target.value)
+})
