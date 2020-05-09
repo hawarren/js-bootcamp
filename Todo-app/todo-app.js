@@ -25,7 +25,7 @@ const renderTodos = function (itemsLeftToDo, textFilter){
 const filteredItems = itemsLeftToDo(todos).filter(function (item){
     return item.title.toLowerCase().includes(textFilters.searchText.toLowerCase())
 })
-summary.textContent = `You have ${itemsLeftToDo.length} things to do`
+summary.textContent = `You have ${filteredItems.length} things to do`
 document.querySelector('#myTodos').appendChild(summary)
 
     filteredItems.forEach(function (item) {
