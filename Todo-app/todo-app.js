@@ -14,7 +14,7 @@ let todos = [{ title: 'Wake up in the morning', isDone: true }
 //print message to console on click
 //challenge 54 use id attribute to change button text
 const itemsLeft = todos.filter(function (item) {
-    return item.isDone //== 'false'
+    return !item.isDone //returns false when isDone is true (ie item is done so we don't want it in our set)
 })
 //create a header for our summary
 const summary = document.createElement('h2')
