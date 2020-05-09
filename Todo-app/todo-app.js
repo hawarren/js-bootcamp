@@ -5,47 +5,40 @@ let todos = [{ title: 'Wake up in the morning', isDone: true }
     , { title: 'buy food', isDone: false }
     , { title: 'get dressed for success', isDone: true }
 ]
-//challenge 52
-//print summary message: "You have x todos left"
-//add a paragraph for each todo item
-//get a filtered list of items left todo
-//challenge 53
-//Add button with some text "something like 'add todo'"
-//print message to console on click
-//challenge 54 use id attribute to change button text
-const itemsLeft = todos.filter(function (item) {
+
+const summary = document.createElement('h2')
+const textFilters ={
+searchText: ''
+} 
+const itemsLeftToDo = todos.filter(function (item) {
     return !item.isDone //returns false when isDone is true (ie item is done so we don't want it in our set)
 })
-//create a header for our summary
-const summary = document.createElement('h2')
-const filters = {
-    searchText:''
-}
-const renderNotes = function (notes, filters){
-    const filteredNotes = notes.filter(function(note){
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-    filteredNotes.forEach(function(note){
-        const noteEl = document.createElement('p')
-        noteEl.textContent = note.title
 
+//this functions renders the todo items not done, and applies filter
+//from the input field on the page.
+const renderTodos = function (itemsLeftToDo, textFilter){
+    //clear page of todos before rerendering
+    document.querySelector('#myTodos').textContent = ''
+const filteredItems = itemsLeftToDo.filter(function (item){
+    return item.title.toLowerCase().includes(textFilters.searchText.toLowerCase())
+})
+summary.textContent = `You have ${itemsLeftToDo.length} things to do`
+document.querySelector('#myTodos').appendChild(summary)
+
+    filteredItems.forEach(function (item) {
+        let itemToAdd = document.createElement('p')
+        itemToAdd.textContent = item.title
+        document.querySelector('#myTodos').appendChild(itemToAdd)
     })
 }
-renderNotes(notes, filters)
-summary.textContent = `You have ${itemsLeft.length} things to do`
-document.querySelector('body').appendChild(summary)
-//add a paragraph for each filter item
-itemsLeft.forEach(function (item) {
-    let itemToAdd = document.createElement('p')
-    itemToAdd.textContent = item.title
-    document.querySelector('body').appendChild(itemToAdd)
-})
+renderTodos(itemsLeftToDo, textFilters)
 document.querySelector('#create-todo').addEventListener('click', item => {
     console.log('Item added to Todo List')
 })
-document.querySelector('#todo-text').addEventListener('input', item => function (e)
-{
+document.querySelector('#todo-text').addEventListener('input', item => function (e) {
     console.log(e.target.value)
-    filters.searchText = e.target.value
-    renderNotes(notes, filter)
+})
+document.querySelector('#searchText').addEventListener('input', function (e) {
+    textFilters.searchText = e.target.value
+    renderTodos(itemsLeftToDo, textFilters)
 })

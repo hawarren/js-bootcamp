@@ -11,3 +11,8 @@ Add an id to the todo button and target it instead of the tag name
 
 Challenge 55:
 add an input field and add an eventlistener for the input eventlistener add placeholder
+
+Challenge 57.
+1. Setup a div contain for todos
+2.Setup filters (searchText) and wire up a new filter input to change it
+3.Create a renderTodos function to render and rerender the latest filtered data
