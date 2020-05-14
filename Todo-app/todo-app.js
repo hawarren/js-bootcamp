@@ -8,9 +8,10 @@ let todos = [{ title: 'Wake up in the morning', isDone: true }
 
 const summary = document.createElement('h2')
 const textFilters ={
-searchText: ''
+searchText: '',
+hideCompleted: false
 } 
-const itemsLeftToDo = function(todos)
+const itemsLeftToDo = function()
 {
    return todos.filter(function (item) {
         return !item.isDone //returns false when isDone is true (ie item is done so we don't want it in our set)
@@ -19,13 +20,16 @@ const itemsLeftToDo = function(todos)
 
 //this functions renders the todo items not done, and applies filter
 //from the input field on the page.
-const renderTodos = function (itemsLeftToDo, textFilter){
+const renderTodos = function (todos, textFilter){
     //clear page of todos before rerendering
     document.querySelector('#myTodos').textContent = ''
-const filteredItems = itemsLeftToDo(todos).filter(function (item){
+const filteredItems = todos.filter(function (item){
     return item.title.toLowerCase().includes(textFilters.searchText.toLowerCase())
+    
 })
 summary.textContent = `You have ${filteredItems.length} things to do`
+if (textFilters.hideCompleted)
+summary.textContent+= '(Filtering completed items)'
 document.querySelector('#myTodos').appendChild(summary)
 
     filteredItems.forEach(function (item) {
@@ -34,10 +38,10 @@ document.querySelector('#myTodos').appendChild(summary)
         document.querySelector('#myTodos').appendChild(itemToAdd)
     })
 }
-renderTodos(itemsLeftToDo, textFilters)
+renderTodos(todos, textFilters)
 document.querySelector('#searchText').addEventListener('input', function (event) {
     textFilters.searchText = event.target.value
-    renderTodos(itemsLeftToDo, textFilters)
+    renderTodos(itemsLeftToDo(), textFilters)
 })
 
 document.querySelector('#todo-form').addEventListener('submit', function (e){
@@ -46,5 +50,9 @@ document.querySelector('#todo-form').addEventListener('submit', function (e){
     console.log(`${e.target.elements.todoText.value} has been added to my todos`)
     e.target.elements.todoText.value = '';
     textFilters.searchText = '';    
-    renderTodos(itemsLeftToDo, textFilters)
+    renderTodos(itemsLeftToDo(), textFilters)
+})
+document.querySelector('#completedToggle').addEventListener('change', function(e){
+    textFilters.hideCompleted = e.target.checked // toggle value according to checkbox
+textFilters.hideCompleted ? renderTodos(itemsLeftToDo(), textFilters) : renderTodos(todos, textFilters)
 })

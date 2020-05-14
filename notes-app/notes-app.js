@@ -46,6 +46,9 @@ document.querySelector('#search-text').addEventListener('input', function (e){
 })
 document.querySelector('#name-form').addEventListener('submit', function(e){
     e.preventDefault()//keeps form from being submitted to server (ie the default behavior of submit)
-    console.log(e.target.elements.firstName.value) //
+    console.log(e.target.elements.inputTitle.value) //
     e.target.elements.firstName.value = ''
+})
+document.querySelector('#checkMe').addEventListener('change', function(e){
+console.log(e.target.checked);
 })

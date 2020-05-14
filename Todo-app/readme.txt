@@ -16,3 +16,10 @@ Challenge 57.
 1. Setup a div contain for todos
 2.Setup filters (searchText) and wire up a new filter input to change it
 3.Create a renderTodos function to render and rerender the latest filtered data
+
+
+Challenge 59. Checkboxes
+1.Create a checkbox and setup event listener -> "Hide Completed"
+2.Create new hideCompleted filter (default false)
+3.Update hideCompleted and rerender list on checkbox change
+4.Setup renderTodos to remove completed items
