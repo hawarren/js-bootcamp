@@ -2,7 +2,7 @@ let todos = [{ title: 'Wake up in the morning', isDone: true }
     , { title: ' Exercise for 10 minutes', isDone: false }
     , { title: 'eat a healthy breakfast', isDone: true }
     , { title: 'shower and brush teeth', isDone: false }
-    , { title: 'buy food', isDone: false }
+    , { title: 'buy food', isDone: true }
     , { title: 'get dressed for success', isDone: true }
 ]
 
@@ -35,8 +35,8 @@ document.querySelector('#myTodos').appendChild(summary)
     })
 }
 renderTodos(itemsLeftToDo, textFilters)
-document.querySelector('#searchText').addEventListener('input', function (e) {
-    textFilters.searchText = e.target.value
+document.querySelector('#searchText').addEventListener('input', function (event) {
+    textFilters.searchText = event.target.value
     renderTodos(itemsLeftToDo, textFilters)
 })
 
@@ -45,5 +45,6 @@ document.querySelector('#todo-form').addEventListener('submit', function (e){
     todos.push({title: e.target.elements.todoText.value, isDone: false})
     console.log(`${e.target.elements.todoText.value} has been added to my todos`)
     e.target.elements.todoText.value = '';
+    textFilters.searchText = '';    
     renderTodos(itemsLeftToDo, textFilters)
 })
