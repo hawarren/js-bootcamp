@@ -49,6 +49,7 @@ document.querySelector('#name-form').addEventListener('submit', function(e){
     console.log(e.target.elements.inputTitle.value) //
     e.target.elements.firstName.value = ''
 })
-document.querySelector('#checkMe').addEventListener('change', function(e){
-console.log(e.target.checked);
+
+document.querySelector('#sortStyle').addEventListener('change', function(e){
+    console.log(e.target.value) //print the selected item in dropdown
 })
