@@ -22,4 +22,10 @@ Challenge 59. Checkboxes
 1.Create a checkbox and setup event listener -> "Hide Completed"
 2.Create new hideCompleted filter (default false)
 3.Update hideCompleted and rerender list on checkbox change
-4.Setup renderTodos to remove completed items
+4.Setup renderTodos to remove completed 
+
+60.  no challenge
+63 challenge (saving our data in localStorage)
+1.Delete Dummy data
+2.Read and parse the data when the app starts up
+3.Stringify and write the data when new data is added

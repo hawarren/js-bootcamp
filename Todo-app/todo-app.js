@@ -1,10 +1,11 @@
-let todos = [{ title: 'Wake up in the morning', isDone: true }
-    , { title: ' Exercise for 10 minutes', isDone: false }
-    , { title: 'eat a healthy breakfast', isDone: true }
-    , { title: 'shower and brush teeth', isDone: false }
-    , { title: 'buy food', isDone: true }
-    , { title: 'get dressed for success', isDone: true }
-]
+let todos = []
+
+//load up localStorage
+let todosJson = localStorage.getItem('todos')
+if (todosJson != null)
+{
+    todos = JSON.parse(todosJson)
+}
 
 const summary = document.createElement('h2')
 const textFilters ={
@@ -46,8 +47,11 @@ document.querySelector('#searchText').addEventListener('input', function (event)
 
 document.querySelector('#todo-form').addEventListener('submit', function (e){
     e.preventDefault()
-    todos.push({title: e.target.elements.todoText.value, isDone: false})
+    todos.push({title: e.target.elements.todoText.value, isDone: false}) //add todo to our object
     console.log(`${e.target.elements.todoText.value} has been added to my todos`)
+    todosJson = JSON.stringify(todos) //convert to JSON
+    localStorage.setItem('user', todosJson) //save to localStorage
+    
     e.target.elements.todoText.value = '';
     textFilters.searchText = '';    
     renderTodos(itemsLeftToDo(), textFilters)
