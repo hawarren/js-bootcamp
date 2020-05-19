@@ -14,6 +14,7 @@ let getSavedTodos = function (){
 
 //Save todos to local storage
 const saveTodos = function(title){
+    todos.push({title: 'default title', isDone: true})
     todos.push({title: title, isDone: false})
     todosJson = JSON.stringify(todos)
     localStorage.setItem('todos', todosJson)    
@@ -23,14 +24,19 @@ const saveTodos = function(title){
 //Render application todos based on filters
 let renderTodos = function(todos, textFilter){   
     document.querySelector('#myTodos').textContent = ''
-    const filteredItems = todos.filter(function(item){
+    let filteredItems = todos.filter(function(item){
         let hasText = item.title.toLowerCase().includes(textFilters.searchText) 
         
         //show if it both has the text value and 
         //we want to include doneTodos
-        return !textFilter.hideCompleted ? hasText && item.isDone : hasText
-         
+        return hasText         
     })
+    if (textFilters.hideCompleted)
+    {
+        filteredItems = filteredItems.forEach(function(item){
+        return !item.isDone 
+        })
+    }
     generateTodoDOM(filteredItems)
 }
 
