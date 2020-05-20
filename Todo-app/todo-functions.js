@@ -1,40 +1,36 @@
 //challenge: create the following functions
 //fetch todos from local storage
-let getSavedTodos = function (){
+let getSavedTodos = function () {
     let todosJson = localStorage.getItem('todos')
-    if (todosJson != null)
-    {
+    if (todosJson != null) {
         return JSON.parse(todosJson)
     }
-    else
-    {
-    return []
+    else {
+        return []
     }
 }
 
 //Save todos to local storage
-const saveTodos = function(title){
-    todos.push({title: 'default title', isDone: true})
-    todos.push({title: title, isDone: false})
+const saveTodos = function (title) {
+    todos.push({ title: 'default title', isDone: true })
+    todos.push({ title: title, isDone: false })
     todosJson = JSON.stringify(todos)
-    localStorage.setItem('todos', todosJson)    
+    localStorage.setItem('todos', todosJson)
     console.log(`${title} has been added to the todo list`)
 }
 
 //Render application todos based on filters
-let renderTodos = function(todos, textFilter){   
+let renderTodos = function (todos, textFilter) {
     document.querySelector('#myTodos').textContent = ''
-    let filteredItems = todos.filter(function(item){
-        let hasText = item.title.toLowerCase().includes(textFilters.searchText) 
-        
-        //show if it both has the text value and 
-        //we want to include doneTodos
-        return hasText         
+    let filteredItems = todos.filter(function (item) {
+        let hasText = item.title.toLowerCase().includes(textFilters.searchText)
+        //include if it has the text value we filtered on     
+        return hasText
     })
-    if (textFilters.hideCompleted)
+    if (textFilters.hideCompleted) //filter out completed items in place (filter and assign back to same variable)
     {
-        filteredItems = filteredItems.forEach(function(item){
-        return !item.isDone 
+        filteredItems = filteredItems.filter(function (item) {
+            return !item.isDone
         })
     }
     generateTodoDOM(filteredItems)
@@ -42,19 +38,24 @@ let renderTodos = function(todos, textFilter){
 
 
 //Get the DOM elements for an individual note
-let generateTodoDOM = function(filteredList){
-    generateSummaryDOM(filteredList.length)
-    filteredList.forEach(function (item){
-        let itemToAdd = document.createElement('p')
-        itemToAdd.textContent = item.title
-        document.querySelector('#myTodos').appendChild(itemToAdd)
-    })
+let generateTodoDOM = function (filteredList) {
+    if (filteredList == undefined) {
+        console.log("generateTodoDOM: No filteredlist to print")
+    }
+    else {
+
+        generateSummaryDOM(filteredList.length)
+        filteredList.forEach(function (item) {
+            let itemToAdd = document.createElement('p')
+            itemToAdd.textContent = item.title
+            document.querySelector('#myTodos').appendChild(itemToAdd)
+        })
+    }
 }
 
 //Get the Dom elements for the list summary
-let generateSummaryDOM = function(count)
-{
+let generateSummaryDOM = function (count) {
     let summaryEl = document.createElement('h2')
-   summaryEl.textContent = `You have ${count} items left to do` 
+    summaryEl.textContent = `You have ${count} items left to do`
     document.querySelector('#myTodos').appendChild(summaryEl)
 }
