@@ -13,26 +13,23 @@ const notes = [
         title: 'Office modification',
         body: 'Get a new seat'
     }]
-console.log('This is from my html index from a different file')
-const p = document.querySelector('p') //gets first element with matching tag
-const ps = document.querySelectorAll('p')
-console.log(p)
+
 
 const filters = {
     searchText:''
 }
-const renderNotes = function (notes, filters){
-    const filteredNotes = notes.filter(function(note){
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
-    document.querySelector('#notes').innerHTML = '' //clear the notes first
-    //create elements for just the filtered notes
-    filteredNotes.forEach(function(note){
-        const noteEl = document.createElement('p')
-        noteEl.textContent = note.title
-        document.querySelector('#notes').appendChild(noteEl)
-    })
-}
+// const renderNotes = function (notes, filters){
+//     const filteredNotes = notes.filter(function(note){
+//         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
+//     })
+//     document.querySelector('#notes').innerHTML = '' //clear the notes first
+//     //create elements for just the filtered notes
+//     filteredNotes.forEach(function(note){
+//         const noteEl = document.createElement('p')
+//         noteEl.textContent = note.title
+//         document.querySelector('#notes').appendChild(noteEl)
+//     })
+// }
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('click',function(event){
@@ -47,7 +44,11 @@ document.querySelector('#search-text').addEventListener('input', function (e){
 document.querySelector('#name-form').addEventListener('submit', function(e){
     e.preventDefault()//keeps form from being submitted to server (ie the default behavior of submit)
     console.log(e.target.elements.inputTitle.value) //
-    e.target.elements.firstName.value = ''
+    console.log(e.target.elements.inputBody.value) //
+    notes.push({title: e.target.elements.inputTitle, body: e.target.elements.inputBody.value})
+    e.target.elements.inputTitle.value = ''
+    e.target.elements.inputBody.value = ''
+    renderNotes(notes, filters)
 })
 
 document.querySelector('#sortStyle').addEventListener('change', function(e){

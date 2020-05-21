@@ -49,6 +49,7 @@ let generateTodoDOM = function (filteredList) {
             let itemToAdd = document.createElement('p')
             itemToAdd.textContent = item.title
             document.querySelector('#myTodos').appendChild(itemToAdd)
+            debugger
         })
     }
 }
