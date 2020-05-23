@@ -1,21 +1,24 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <!-- TodoIndex.html -->
 <html>
-    <head>        
-    </head>
-    <body>
-        <input id="searchText" placeholder="Filter todos here">
-        <label>
+
+<head>
+</head>
+
+<body>
+    <input id="searchText" placeholder="Filter todos here">
+    <label>
             <input type="checkbox" id="completedToggle"> Hide Completed
         </label>
-        <div id="myTodos">
-        </div>        
-        <form id="todo-form">
-            <input type="text" placeholder="Enter a Todo item" name="todoText">
-            <button>Add Todo</button>
-        </form>
-        
-    </body>
-    <script src="./todo-functions.js"></script>
-    <script src="./todo-app.js"></script>
+    <div id="myTodos">
+    </div>
+    <form id="todo-form">
+        <input type="text" placeholder="Enter a Todo item" name="todoText">
+        <button>Add Todo</button>
+    </form>
+</body>
+<script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+<script src="./todo-functions.js"></script>
+<script src="./todo-app.js"></script>
+
 </html>
