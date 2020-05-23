@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <!-- see mdn html documentation on MDN -->
 <html>
-  <head> </head>
-  <body>
+
+<head> </head>
+
+<body>
     <h1>
-      Notes App
+        Notes App
     </h1>
     <h2>
-      Take notes and never forget
+        Take notes and never forget
     </h2>
     <input id="search-text" />
     <div id="notes"></div>
@@ -17,13 +19,15 @@
       <option value="completedFirst">Completed items first</option>
     </select>
     <form id="name-form">
-      <input type="text" placeholder="Note Title" name="inputTitle" />
-      <input type="text" placeholder="Note Body" name ="inputBody"/>
-      <button id="create-note">Create Note</button>
-      
-    </form>
+        <input type="text" placeholder="Note Title" name="inputTitle" />
+        <input type="text" placeholder="Note Body" name="inputBody" />
+        <button id="create-note">Create Note</button>
 
-<script src="/notes-functions.js"></script>
+    </form>
+    <!-- uuidv4 script library generates cryptographically strong uuids -->
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script src="/notes-functions.js"></script>
     <script src="/notes-app.js"></script>
-  </body>
+</body>
+
 </html>
