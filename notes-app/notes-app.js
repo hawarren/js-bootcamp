@@ -1,18 +1,23 @@
 //DOM - Document Object Model (a document that is modelled like an object, with methods and properties)
 //the object is called "document"
-const notes = [{
-        title: 'My next trip',
-        body: 'I would like to go to spain'
-    },
-    {
-        title: 'Habits to work on',
-        body: 'Exercise. Eating a bit better'
-    },
-    {
-        title: 'Office modification',
-        body: 'Get a new seat'
-    }
-]
+const notes = getSavedNotes();
+
+// = [{
+//         id: 01,
+//         title: 'My next trip',
+//         body: 'I would like to go to spain'
+//     },
+//     {
+//         id: 02,
+//         title: 'Habits to work on',
+//         body: 'Exercise. Eating a bit better'
+//     },
+//     {
+//         id: 03,
+//         title: 'Office modification',
+//         body: 'Get a new seat'
+//     }
+// ]
 
 
 const filters = {
@@ -32,8 +37,10 @@ const filters = {
     // }
 renderNotes(notes, filters)
 
-document.querySelector('#create-note').addEventListener('click', function(event) {
-    event.target.textContent = 'This button was clicked'
+document.querySelector('#create-note').addEventListener('submit', function(event) {
+    addNotes(event.target.elements.inputTitle, event.target.elements.inputBody)
+    event.target.elements
+    event.target.textContent = 'Note Added'
 })
 
 document.querySelector('#search-text').addEventListener('input', function(e) {

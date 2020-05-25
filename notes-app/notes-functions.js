@@ -1,19 +1,25 @@
 //create the following functions
 //get saved notes
 let getSavedNotes = function() {
-    return notes;
+    let storedNotes = localStorage.getItem('storedNotes')
+    if (storedNotes == null)
+        return []
+    let JSONstoredNotes = JSON.parse(storedNotes)
+    return JSONstoredNotes;
 };
+
 let addNotes = function(newTitle, newBody) {
-    //assign a uuid so we can identify that note later
     notes.push({
-        uuid: uuidv4(),
+        id: uuidv4(), //assign a uuid so we can identify that note later
         title: newTitle,
         body: newBody
     });
+    saveNotes(notes)
 };
 //Save notes
-let saveNotes = function(newNote) {
-    notes.add(newNote);
+let saveNotes = function(notesToSave) {
+    let notesJSON = JSON.stringify(notesToSave)
+    localStorage.setItem('storedNotes', notesJSON)
 };
 //render notes based on filters
 let renderNotes = function(notes, filters) {
@@ -28,15 +34,33 @@ let renderNotes = function(notes, filters) {
 
     generateSummaryDom(filteredNotes.length);
     generateNoteDom(filteredNotes);
-    debugger;
+
 };
 
 //generateNoteDOM
 let generateNoteDom = function(notes) {
+    //add div root, then put checkbox, note and delete button inside
     notes.forEach(function(note) {
-        const noteEl = document.createElement("p");
-        noteEl.textContent = note.title;
-        document.querySelector("#notes").appendChild(noteEl);
+        let rootDiv = document.createElement('div')
+            //add checkbox and x button for each div
+        let newCheckBox = document.createElement('input');
+        newCheckBox.setAttribute('type', 'checkbox')
+        newCheckBox.addEventListener('input', function(e) {
+            console.log(note)
+        })
+        let deleteButton = document.createElement('button')
+        deleteButton.innerText = 'x'
+        deleteButton.addEventListener('click', function(e) {
+            console.log(note)
+            removeNote(note)
+        })
+        let mySpan = document.createElement('span')
+        mySpan.innerText = `${note.title} \: ${note.body}`
+            //add all elements to my root div
+        rootDiv.appendChild(newCheckBox)
+        rootDiv.appendChild(mySpan)
+        rootDiv.appendChild(deleteButton)
+        document.querySelector("#notes").appendChild(rootDiv);
     });
 };
 //generateSummaryDom
@@ -45,3 +69,16 @@ let generateSummaryDom = function(count) {
     noteHead.textContent = `You have ${count} notes`;
     document.querySelector("#notes").appendChild(noteHead);
 };
+let removeNote = function(noteToRemove) {
+    let foundNote = notes.findIndex(function(element) {
+        console.log(`${element.id}, compared to ${noteToRemove.id}`)
+        return element.id == noteToRemove.id
+    })
+    if (foundNote != -1) {
+        console.log(`Removing ${notes[foundNote].title}`)
+        notes.splice(foundNote, 1)
+    }
+    saveNotes(notes)
+
+    renderNotes(notes, filters)
+}

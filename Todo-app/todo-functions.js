@@ -52,7 +52,7 @@ let generateTodoDOM = function(filteredList) {
             const mySpan = document.createElement("span");
             mySpan.textContent = item.title;
             const thisCheckBox = document.createElement("input");
-            thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type
+            thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
             const removeButtonEl = document.createElement("button");
             removeButtonEl.textContent = "x";
             //add our stuff to the rootdiv and then append it to the DOM
