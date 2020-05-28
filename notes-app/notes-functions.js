@@ -45,6 +45,8 @@ let generateNoteDom = function(notes) {
             //add checkbox and x button for each div
         let newCheckBox = document.createElement('input');
         newCheckBox.setAttribute('type', 'checkbox')
+            // if (note.)
+        newCheckBox.checked = true
         newCheckBox.addEventListener('input', function(e) {
             console.log(note)
         })
