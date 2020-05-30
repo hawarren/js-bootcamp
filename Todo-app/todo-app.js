@@ -16,7 +16,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(e) {
     e.preventDefault()
     todos.push({ uuid: uuidv4(), title: e.target.elements.todoText.value, isDone: false }); //add a uuid to our title
     saveTodos();
-    console.log(`${title} has been added to the todo list`);
+    console.log(`${e.target.elements.todoText.value} has been added to the todo list`);
     e.target.elements.todoText.value = '';
     textFilters.searchText = '';
     renderTodos(todos, textFilters)
