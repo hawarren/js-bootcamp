@@ -14,8 +14,15 @@ const saveTodos = function() {
     localStorage.setItem("todos", todosJson);
 
 };
-
-//Render application todos based on filters
+const toggleTodo = function(id) {
+        const todo = todos.find(function(todo) {
+            return todo.uuid === id
+        })
+        if (todo !== undefined) {
+            todo.isDone = !todo.isDone
+        }
+    }
+    //Render application todos based on filters
 let renderTodos = function(todos, textFilter) {
     document.querySelector("#myTodos").textContent = "";
     let filteredItems = todos.filter(function(item) {
@@ -56,14 +63,16 @@ let generateTodoDOM = function(filteredList) {
             thisCheckBox.checked = item.isDone
             thisCheckBox.id = item.uuid
             thisCheckBox.addEventListener('change', function(e) {
-                    //find this todos in memory based on the uuid of the checkbox
-                    let noteIndex = function() {
-                            return todos.findIndex(function(element) {
-                                return element.uuid == thisCheckBox.id
-                            })
-                        }
-                        //update that todo in array with the current checkbox value
-                    todos[noteIndex()].isDone = e.target.checked
+                    // //find this todos in memory based on the uuid of the checkbox
+                    // let noteIndex = function() {
+                    //         return todos.findIndex(function(element) {
+                    //             return element.uuid == thisCheckBox.id
+                    //         })
+                    //     }
+                    //     //update that todo in array with the current checkbox value
+                    // todos[noteIndex()].isDone = e.target.checked
+
+                    toggleTodo(item.uuid)
                     saveTodos()
                 })
                 //add our stuff to the rootdiv and then append it to the DOM
