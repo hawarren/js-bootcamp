@@ -15,9 +15,11 @@ const saveTodos = function() {
 
 };
 const toggleTodo = function(id) {
+        //finds reference to my todo object within the array    
         const todo = todos.find(function(todo) {
-            return todo.uuid === id
-        })
+                return todo.uuid === id
+            })
+            //update the todo item via the reference we just grabbed
         if (todo !== undefined) {
             todo.isDone = !todo.isDone
         }
@@ -55,6 +57,7 @@ let generateTodoDOM = function(filteredList) {
             const rootDiv = document.createElement("div"); //element to hold our todo with checkbox in it on one line
             const mySpan = document.createElement("span");
             mySpan.textContent = item.title;
+
             const thisCheckBox = document.createElement("input");
             thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
             const removeButtonEl = document.createElement("button");

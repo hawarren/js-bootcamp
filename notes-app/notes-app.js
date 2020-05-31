@@ -23,10 +23,16 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     e.preventDefault() //keeps form from being submitted to server (ie the default behavior of submit)
     console.log(e.target.elements.inputTitle.value) //
     console.log(e.target.elements.inputBody.value) //
-    addNotes(e.target.elements.inputTitle.value, e.target.elements.inputBody.value)
-    e.target.elements.inputTitle.value = ''
-    e.target.elements.inputBody.value = ''
-    renderNotes(notes, filters)
+        //addNotes("Unnamed Note", "")
+    let newID = uuidv4()
+    notes.push({
+        id: newID, //assign a uuid so we can identify that note later
+        title: '',
+        body: ''
+    });
+    saveNotes(notes);
+    location.assign(`./edit.html${location.hash}`)
+    location.hash = newID
 })
 
 document.querySelector('#sortStyle').addEventListener('change', function(e) {

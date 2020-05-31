@@ -56,8 +56,10 @@ let generateNoteDom = function(notes) {
             console.log(note)
             removeNote(note)
         })
-        let mySpan = document.createElement('span')
+        let mySpan = document.createElement('a')
         mySpan.innerText = `${note.title} \: ${note.body}`
+
+        mySpan.setAttribute('href', `./edit.html#${note.id}`) // add a link to the edit page along with the note id as a the hash
             //add all elements to my root div
         rootDiv.appendChild(newCheckBox)
         rootDiv.appendChild(mySpan)
