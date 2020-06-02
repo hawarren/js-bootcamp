@@ -30,9 +30,10 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
         title: '',
         body: ''
     });
+    //save the note and redirect to edit page for that note
     saveNotes(notes);
-    location.assign(`./edit.html${location.hash}`)
-    location.hash = newID
+    location.assign(`./edit.html#${newID}`)
+
 })
 
 document.querySelector('#sortStyle').addEventListener('change', function(e) {

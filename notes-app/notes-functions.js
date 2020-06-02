@@ -2,7 +2,7 @@
 //get saved notes
 let getSavedNotes = function() {
     let storedNotes = localStorage.getItem('storedNotes')
-    if (storedNotes == null)
+    if (storedNotes == "undefined" || storedNotes == null)
         return []
     let JSONstoredNotes = JSON.parse(storedNotes)
     return JSONstoredNotes;
@@ -18,6 +18,10 @@ let addNotes = function(newTitle, newBody) {
 };
 //Save notes
 let saveNotes = function(notesToSave) {
+    if (notesToSave == undefined) {
+        console.log('No notes to save')
+        return
+    }
     let notesJSON = JSON.stringify(notesToSave)
     localStorage.setItem('storedNotes', notesJSON)
 };
