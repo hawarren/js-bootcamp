@@ -1,6 +1,6 @@
 //DOM - Document Object Model (a document that is modelled like an object, with methods and properties)
 //the object is called "document"
-const notes = getSavedNotes();
+notes = getSavedNotes();
 
 const filters = {
     searchText: ''
@@ -27,15 +27,20 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     let newID = uuidv4()
     notes.push({
         id: newID, //assign a uuid so we can identify that note later
-        title: '',
-        body: ''
+        title: e.target.elements.inputTitle.value,
+        body: e.target.elements.inputBody.value
     });
     //save the note and redirect to edit page for that note
     saveNotes(notes);
     location.assign(`./edit.html#${newID}`)
-
 })
 
 document.querySelector('#sortStyle').addEventListener('change', function(e) {
     console.log(e.target.value) //print the selected item in dropdown
+})
+window.addEventListener('storage', function(e) {
+    this.window.console.log('Values changed')
+    debugger
+    if (e.key === 'storedNotes')
+        renderNotes(getSavedNotes(), filters)
 })
