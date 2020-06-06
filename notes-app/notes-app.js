@@ -44,3 +44,25 @@ window.addEventListener('storage', function(e) {
     if (e.key === 'storedNotes')
         renderNotes(getSavedNotes(), filters)
 })
+const now = new Date()
+const timestamp = now.getTime()
+console.log(`The time and date is ${now}`)
+console.log(`Year is ${now.getFullYear()}`)
+console.log(`Month is 0 indexed, it is: ${now.getMonth()}`)
+console.log(`Day is ${now.getDay()}`)
+console.log(`Hour is ${now.getHours()}`)
+console.log(`Minutes is ${now.getMinutes()}`)
+console.log(`Seconds is ${now.getSeconds()}`)
+    // console.log(month)
+console.log(`timestamp ${timestamp} converted to date ${new Date(timestamp)}`)
+
+//create two dates in the past (use string for date)
+//2. Get timestamps for both
+//3.Figure out which is first and print it's time (use toString)
+let myBday = new Date('July 6 1981').getTime()
+let broBday = new Date('July 31, 1988').getTime()
+
+if (myBday < broBday)
+    console.log(new Date(myBday).get)
+else
+    console.log(new Date(broBday))
