@@ -44,28 +44,21 @@ window.addEventListener('storage', function(e) {
     if (e.key === 'storedNotes')
         renderNotes(getSavedNotes(), filters)
 })
-const now = new Date()
-const timestamp = now.getTime()
-console.log(`The time and date is ${now}`)
-console.log(`Year is ${now.getFullYear()}`)
-console.log(`Month is 0 indexed, it is: ${now.getMonth()}`)
-console.log(`Day of week is ${now.getDay()}`)
-console.log(`Day of month is ${now.getDate()}`)
-console.log(`Month and day is ${now.getMonth()+1}\\${now.getDate()}`)
-console.log(`Hour is ${now.getHours()}`)
-console.log(`Minutes is ${now.getMinutes()}`)
-console.log(`Seconds is ${now.getSeconds()}`)
-    // console.log(month)
-console.log(`timestamp ${timestamp} converted to date ${new Date(timestamp)}`)
+const now = moment()
+console.log(now.toString())
+now.add(1, 'year').subtract(20, 'days')
+now.minute(1)
 
-//create two dates in the past (use string for date)
-//2. Get timestamps for both
-//3.Figure out which is first and print it's time (use toString)
-let hanifBday = new Date('July 6 1981').getTime() //get the timestamp not just the date
-let dariqueBday = new Date('July 31, 1988').getTime()
+//November 3rd, 2003
+console.log(now.format("MMMM Do YYYY"))
+console.log(now.fromNow())
+console.log(now.valueOf())
+const nowTimeStamp = now.valueOf()
+console.log(moment(now.valueOf()))
 
-if (hanifBday < dariqueBday) {
-    console.log(new Date(hanifBday) + `which is Hanif\'s Birthday`)
-    console.log(new Date(dariqueBday) + ` is the other date, which is Darique\'s Birthday`)
-} else
-    console.log(new Date(dariqueBday) + `which is Hanif\'s Birthday`)
+//1.Create a new moment
+//2. Set month, day, and year to your birthday
+//3. Use format to print it in the following way: Jan 6, 1991
+const hwBday = moment().date(6).month('July').year(1981)
+console.log(`Hanif\'s bornday is ${hwBday.format('MMM Do, YYYY')}`)
+console.log(hwBday.fromNow())
