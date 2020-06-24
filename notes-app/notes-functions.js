@@ -9,10 +9,13 @@ let getSavedNotes = function() {
 };
 
 let addNotes = function(newTitle, newBody) {
+    let now = moment().valueOf()
     notes.push({
         id: uuidv4(), //assign a uuid so we can identify that note later
         title: newTitle,
-        body: newBody
+        body: newBody,
+        createdAt: now,
+        updatedAt: now
     });
     saveNotes(notes)
 };
@@ -22,6 +25,12 @@ let saveNotes = function(notesToSave) {
         console.log('No notes to save')
         return
     }
+    let now = moment().valueOf()
+    notesToSave.forEach(function(item) {
+        if (item.createdAt != undefined)
+            item.createdAt = now
+        item.updatedAt = now
+    })
     let notesJSON = JSON.stringify(notesToSave)
     localStorage.setItem('storedNotes', notesJSON)
 };

@@ -22,10 +22,14 @@ renderThisNote()
 
 document.getElementById('note-title').addEventListener('change', function(e) {
     note.title = e.target.value
+    note.updatedAt = moment().valueOf()
+    let timeDiff = note.updatedAt - note.createdAt
+    console.log(`note created ${moment(timeDiff).fromNow()}`)
     saveNotes(notes)
 })
 document.getElementById('note-body').addEventListener('change', function(e) {
     note.body = e.target.value
+    note.updatedAt = moment().valueOf()
     saveNotes(notes)
 })
 removeElement.addEventListener('click', function(e) {

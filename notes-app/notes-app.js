@@ -10,7 +10,7 @@ renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('submit', function(event) {
     addNotes(event.target.elements.inputTitle, event.target.elements.inputBody)
-    event.target.elements
+
     event.target.textContent = 'Note Added'
 })
 
@@ -25,10 +25,13 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     console.log(e.target.elements.inputBody.value) //
         //addNotes("Unnamed Note", "")
     let newID = uuidv4()
+    let now = moment.valueOf()
     notes.push({
         id: newID, //assign a uuid so we can identify that note later
         title: e.target.elements.inputTitle.value,
-        body: e.target.elements.inputBody.value
+        body: e.target.elements.inputBody.value,
+        createdAt: now,
+        updatedAt: now
     });
     //save the note and redirect to edit page for that note
     saveNotes(notes);
@@ -44,14 +47,14 @@ window.addEventListener('storage', function(e) {
     if (e.key === 'storedNotes')
         renderNotes(getSavedNotes(), filters)
 })
-const now = moment()
+const now = moment() //create timestamp
 console.log(now.toString())
 now.add(1, 'year').subtract(20, 'days')
 now.minute(1)
 
 //November 3rd, 2003
 console.log(now.format("MMMM Do YYYY"))
-console.log(now.fromNow())
+console.log(now.fromNow()) //log timestamp to console
 console.log(now.valueOf())
 const nowTimeStamp = now.valueOf()
 console.log(moment(now.valueOf()))
