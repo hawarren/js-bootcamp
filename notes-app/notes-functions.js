@@ -26,11 +26,6 @@ let saveNotes = function(notesToSave) {
         return
     }
     let now = moment().valueOf()
-    notesToSave.forEach(function(item) {
-        if (item.createdAt != undefined)
-            item.createdAt = now
-        item.updatedAt = now
-    })
     let notesJSON = JSON.stringify(notesToSave)
     localStorage.setItem('storedNotes', notesJSON)
 };
