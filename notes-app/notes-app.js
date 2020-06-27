@@ -9,6 +9,7 @@ const filters = {
 renderNotes(notes, filters)
 
 document.querySelector('#create-note').addEventListener('submit', function(event) {
+    debugger
     addNotes(event.target.elements.inputTitle, event.target.elements.inputBody)
 
     event.target.textContent = 'Note Added'
@@ -25,7 +26,8 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     console.log(e.target.elements.inputBody.value) //
         //addNotes("Unnamed Note", "")
     let newID = uuidv4()
-    let now = moment.valueOf()
+    let now = moment().valueOf()
+    console.log(`logging note with timestamp ${moment(now).format('MMM Do YYYY')}`)
     notes.push({
         id: newID, //assign a uuid so we can identify that note later
         title: e.target.elements.inputTitle.value,
@@ -35,7 +37,8 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     });
     //save the note and redirect to edit page for that note
     saveNotes(notes);
-    location.assign(`./edit.html#${newID}`)
+    location.assign(`. / edit.html# $ { newID }
+                    `)
 })
 
 document.querySelector('#sortStyle').addEventListener('change', function(e) {
@@ -62,6 +65,7 @@ console.log(moment(now.valueOf()))
 //1.Create a new moment
 //2. Set month, day, and year to your birthday
 //3. Use format to print it in the following way: Jan 6, 1991
-const hwBday = moment().date(6).month('July').year(1981)
-console.log(`Hanif\'s bornday is ${hwBday.format('MMM Do, YYYY')}`)
-console.log(hwBday.fromNow())
+// const hwBday = moment().date(6).month('July').year(1981)
+// console.log(`Hanif\ 's bornday is ${hwBday.format('
+//                     MMM Do, YYYY ')}`)
+// console.log(hwBday.fromNow())

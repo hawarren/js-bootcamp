@@ -8,20 +8,19 @@ let notes = function() {
         return getSavedNotes()
     }
     //note function grabs the latest
-let note = function() {
-    return notes().find(function(item) {
-        return noteId == item.id
-    })
-}
+let note = notes().find(function(item) {
+    return noteId == item.id
+})
+
 let renderThisNote = function() {
-    //kick back to index of note is not found
+    //kick back to index  if note is not found
     if (note === undefined) {
         location.assign('./index.html')
     }
-    let timeAgo = moment(note().updatedAt).fromNow()
+    let timeAgo = moment(note.updatedAt).fromNow()
         //populates the fields with our note data
-    titleElement.value = note().title
-    bodyElement.value = note().body
+    titleElement.value = note.title
+    bodyElement.value = note.body
     lastUpdatedElement.textContent = `Last edited ${timeAgo}`
 }
 renderThisNote()
@@ -29,13 +28,13 @@ renderThisNote()
 
 
 document.getElementById('note-title').addEventListener('change', function(e) {
-    note().title = e.target.value
-    note().updatedAt = moment().valueOf()
+    note.title = e.target.value
+    note.updatedAt = moment().valueOf()
     saveNotes(notes)
 })
 document.getElementById('note-body').addEventListener('change', function(e) {
-    note().body = e.target.value
-    note().updatedAt = moment().valueOf()
+    note.body = e.target.value
+    note.updatedAt = moment().valueOf()
     saveNotes(notes)
 })
 removeElement.addEventListener('click', function(e) {
