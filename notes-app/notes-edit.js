@@ -4,11 +4,9 @@ const lastUpdatedElement = document.querySelector('#note-lastUpdated')
 const removeElement = document.getElementById('deleteButton')
     //get the id from the hash on the URL
 const noteId = location.hash.substring(1)
-let notes = function() {
-        return getSavedNotes()
-    }
+let notes = getSavedNotes()
     //note function grabs the latest
-let note = notes().find(function(item) {
+let note = notes.find(function(item) {
     return noteId == item.id
 })
 
