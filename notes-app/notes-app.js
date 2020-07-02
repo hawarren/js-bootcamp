@@ -3,7 +3,8 @@
 notes = getSavedNotes();
 
 const filters = {
-    searchText: ''
+    searchText: '',
+    sortBy: 'lastEdited'
 }
 
 renderNotes(notes, filters)
@@ -42,6 +43,12 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
 
 document.querySelector('#sortStyle').addEventListener('change', function(e) {
     console.log(e.target.value) //print the selected item in dropdown
+    filters.sortBy = e.target.value
+        //resort the list in place
+    notes = sortNotes(notes, filters.sortBy)
+        //render the list, sorted this time
+    renderNotes(notes, filters)
+
 })
 window.addEventListener('storage', function(e) {
     this.window.console.log('Values changed')

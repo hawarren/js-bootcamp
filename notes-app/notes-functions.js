@@ -44,6 +44,23 @@ let renderNotes = function(notes, filters) {
     generateNoteDom(filteredNotes);
 
 };
+const sortNotes = function(notes, sortBy) {
+
+    //sort by the last edited time
+    if (sortBy == 'mostRecent') {
+        return notes.sort(function(a, b) {
+            if (a.updatedAt > b.updatedAt) {
+                return -1
+            }
+            if (a.updatedAt < b.updatedAt) {
+                return 1
+            }
+            if (a.updatedAt == b.updatedAt) {
+                return 0
+            }
+        })
+    }
+}
 
 //generateNoteDOM
 let generateNoteDom = function(notes) {
@@ -91,6 +108,5 @@ let removeNote = function(noteToRemove) {
         notes.splice(foundNote, 1)
     }
     saveNotes(notes)
-
     renderNotes(notes, filters)
 }
