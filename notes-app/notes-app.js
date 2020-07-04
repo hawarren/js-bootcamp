@@ -53,8 +53,10 @@ document.querySelector('#sortStyle').addEventListener('change', function(e) {
 window.addEventListener('storage', function(e) {
     this.window.console.log('Values changed')
     debugger
-    if (e.key === 'storedNotes')
-        renderNotes(getSavedNotes(), filters)
+    if (e.key === 'storedNotes') {
+        notes = getSavedNotes();
+        renderNotes(notes, filters)
+    }
 })
 const now = moment() //create timestamp
 console.log(now.toString())
