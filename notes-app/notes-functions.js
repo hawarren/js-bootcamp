@@ -73,7 +73,15 @@ const sortNotes = function(notes, sortBy) {
             }
         })
     }
-    if (sortBy == 'completedFirst') {
+    if (sortBy == 'CreatedFirst') {
+        return notes.sort(function(a, b) {
+            if (a.createdAt > b.createdAt)
+                return -1
+            if (a.createdAt < b.createdAt)
+                return 1
+            if (a.createdAt == b.createdAt)
+                return 0
+        })
 
     }
 }
