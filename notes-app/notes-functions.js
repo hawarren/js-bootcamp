@@ -47,7 +47,7 @@ let renderNotes = function(notes, filters) {
 const sortNotes = function(notes, sortBy) {
 
     //sort by the last edited time
-    if (sortBy == 'mostRecent') {
+    if (sortBy === 'mostRecent') {
         return notes.sort(function(a, b) {
             if (a.updatedAt > b.updatedAt) {
                 return -1
@@ -60,26 +60,26 @@ const sortNotes = function(notes, sortBy) {
             }
         })
     }
-    if (sortBy == 'alphabetSort') {
+    if (sortBy === 'alphabetSort') {
         return notes.sort(function(a, b) {
-            if (a.title > b.title) {
+            if (a.title.toLowerCase() > b.title.toLowerCase()) {
                 return -1
             }
-            if (a.title < b.title) {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) {
                 return 1
             }
-            if (a.title == b.title) {
+            if (a.title.toLowerCase() == b.title.toLowerCase()) {
                 return 0
             }
         })
     }
-    if (sortBy == 'CreatedFirst') {
+    if (sortBy === 'CreatedFirst') {
         return notes.sort(function(a, b) {
             if (a.createdAt > b.createdAt)
                 return -1
             if (a.createdAt < b.createdAt)
                 return 1
-            if (a.createdAt == b.createdAt)
+            if (a.createdAt == b.ctreatedAt)
                 return 0
         })
 
