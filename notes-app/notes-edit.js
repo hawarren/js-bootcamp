@@ -6,11 +6,9 @@ const removeElement = document.getElementById('deleteButton')
 const noteId = location.hash.substring(1)
 let notes = getSavedNotes()
     //note function grabs the latest
-let note = notes.find(function(item) {
-    return noteId == item.id
-})
+let note = notes.find((item) => noteId === item.id)
 
-let renderThisNote = function() {
+let renderThisNote = () => {
     //kick back to index  if note is not found
     if (note === undefined) {
         location.assign('./index.html')
@@ -25,28 +23,26 @@ renderThisNote()
 
 
 
-document.getElementById('note-title').addEventListener('change', function(e) {
+document.getElementById('note-title').addEventListener('change', (e) => {
     note.title = e.target.value
     note.updatedAt = moment().valueOf()
     saveNotes(notes)
 })
-document.getElementById('note-body').addEventListener('change', function(e) {
+document.getElementById('note-body').addEventListener('change', (e) => {
     note.body = e.target.value
     note.updatedAt = moment().valueOf()
     saveNotes(notes)
 })
-removeElement.addEventListener('click', function(e) {
+removeElement.addEventListener('click', (e) => {
         //find the index of the note so we we delete it
-        noteIndex = notes.findIndex(function(item) {
-            return note === item
-        })
+        noteIndex = notes.findIndex((item) => note === item)
         notes.splice(noteIndex)
         saveNotes(notes) //save our newly updated set of notes
         location.assign('./index.html') //route back to home page
     })
     //window object has a localstorage event
     //use it for local storage
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', (e) => {
     this.window.console.log('Values changed')
     debugger
     if (e.key === 'storedNotes')

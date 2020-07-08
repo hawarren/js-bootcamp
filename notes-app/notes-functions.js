@@ -1,6 +1,6 @@
 //create the following functions
 //get saved notes
-let getSavedNotes = function() {
+let getSavedNotes = () => {
     let storedNotes = localStorage.getItem('storedNotes')
     if (storedNotes == "undefined" || storedNotes == null)
         return []
@@ -8,7 +8,7 @@ let getSavedNotes = function() {
     return JSONstoredNotes;
 };
 
-let addNotes = function(newTitle, newBody) {
+let addNotes = (newTitle, newBody) => {
     let now = moment().valueOf()
     notes.push({
         id: uuidv4(), //assign a uuid so we can identify that note later
@@ -20,7 +20,7 @@ let addNotes = function(newTitle, newBody) {
     saveNotes(notes)
 };
 //Save notes
-let saveNotes = function(notesToSave) {
+let saveNotes = (notesToSave) => {
     if (notesToSave == undefined) {
         console.log('No notes to save')
         return
@@ -30,8 +30,8 @@ let saveNotes = function(notesToSave) {
     localStorage.setItem('storedNotes', notesJSON)
 };
 //render notes based on filters
-let renderNotes = function(notes, filters) {
-    const filteredNotes = notes.filter(function(item) {
+let renderNotes = (notes, filters) => {
+    const filteredNotes = notes.filter((item) => {
         return (
             item.title.toLowerCase().includes(filters.searchText.toLowerCase()) ||
             item.body.toLowerCase().includes(filters.searchText.toLowerCase())
@@ -44,11 +44,11 @@ let renderNotes = function(notes, filters) {
     generateNoteDom(filteredNotes);
 
 };
-const sortNotes = function(notes, sortBy) {
+const sortNotes = (notes, sortBy) => {
 
     //sort by the last edited time
     if (sortBy === 'mostRecent') {
-        return notes.sort(function(a, b) {
+        return notes.sort((a, b) => {
             if (a.updatedAt > b.updatedAt) {
                 return -1
             }
@@ -61,7 +61,7 @@ const sortNotes = function(notes, sortBy) {
         })
     }
     if (sortBy === 'alphabetSort') {
-        return notes.sort(function(a, b) {
+        return notes.sort((a, b) => {
             if (a.title.toLowerCase() > b.title.toLowerCase()) {
                 return -1
             }
@@ -74,7 +74,7 @@ const sortNotes = function(notes, sortBy) {
         })
     }
     if (sortBy === 'CreatedFirst') {
-        return notes.sort(function(a, b) {
+        return notes.sort((a, b) => {
             if (a.createdAt > b.createdAt)
                 return -1
             if (a.createdAt < b.createdAt)
@@ -87,21 +87,21 @@ const sortNotes = function(notes, sortBy) {
 }
 
 //generateNoteDOM
-let generateNoteDom = function(notes) {
+let generateNoteDom = (notes) => {
     //add div root, then put checkbox, note and delete button inside
-    notes.forEach(function(note) {
+    notes.forEach((note) => {
         let rootDiv = document.createElement('div')
             //add checkbox and x button for each div
         let newCheckBox = document.createElement('input');
         newCheckBox.setAttribute('type', 'checkbox')
             // if (note.)
         newCheckBox.checked = true
-        newCheckBox.addEventListener('input', function(e) {
+        newCheckBox.addEventListener('input', (e) => {
             console.log(note)
         })
         let deleteButton = document.createElement('button')
         deleteButton.innerText = 'x'
-        deleteButton.addEventListener('click', function(e) {
+        deleteButton.addEventListener('click', (e) => {
             console.log(note)
             removeNote(note)
         })
@@ -117,16 +117,14 @@ let generateNoteDom = function(notes) {
     });
 };
 //generateSummaryDom
-let generateSummaryDom = function(count) {
+let generateSummaryDom = (count) => {
     const noteHead = document.createElement("h2");
     noteHead.textContent = `You have ${count} notes`;
     document.querySelector("#notes").appendChild(noteHead);
 };
-let removeNote = function(noteToRemove) {
-    let foundNote = notes.findIndex(function(element) {
-        console.log(`${element.id}, compared to ${noteToRemove.id}`)
-        return element.id == noteToRemove.id
-    })
+
+let removeNote = (noteToRemove) => {
+    let foundNote = notes.findIndex((note) => element.id == noteToRemove.id)
     if (foundNote != -1) {
         console.log(`Removing ${notes[foundNote].title}`)
         notes.splice(foundNote, 1)

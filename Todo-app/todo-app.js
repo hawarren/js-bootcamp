@@ -7,12 +7,12 @@ const textFilters = {
 }
 
 renderTodos(todos, textFilters)
-document.querySelector('#searchText').addEventListener('input', function(event) {
+document.querySelector('#searchText').addEventListener('input', (event) => {
     textFilters.searchText = event.target.value
     renderTodos(todos, textFilters)
 })
 
-document.querySelector('#todo-form').addEventListener('submit', function(e) {
+document.querySelector('#todo-form').addEventListener('submit', (e) => {
     e.preventDefault()
     todos.push({ uuid: uuidv4(), title: e.target.elements.todoText.value, isDone: false }); //add a uuid to our title
     saveTodos();
@@ -21,7 +21,7 @@ document.querySelector('#todo-form').addEventListener('submit', function(e) {
     textFilters.searchText = '';
     renderTodos(todos, textFilters)
 })
-document.querySelector('#completedToggle').addEventListener('change', function(e) {
+document.querySelector('#completedToggle').addEventListener('change', (e) => {
     textFilters.hideCompleted = e.target.checked // toggle value according to checkbox
     renderTodos(todos, textFilters)
 })

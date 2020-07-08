@@ -1,5 +1,5 @@
 //fetch todos from local storage
-let getSavedTodos = function() {
+let getSavedTodos = () => {
     let todosJson = localStorage.getItem("todos");
     if (todosJson != null) {
         return JSON.parse(todosJson);
@@ -9,34 +9,27 @@ let getSavedTodos = function() {
 };
 
 //Save todos to local storage
-const saveTodos = function() {
+const saveTodos = () => {
     todosJson = JSON.stringify(todos);
     localStorage.setItem("todos", todosJson);
-
 };
-const toggleTodo = function(id) {
+const toggleTodo = (id) => {
         //finds reference to my todo object within the array    
-        const todo = todos.find(function(todo) {
-                return todo.uuid === id
-            })
+        const todo = todos.find((todo) => todo.uuid === id)
             //update the todo item via the reference we just grabbed
         if (todo !== undefined) {
             todo.isDone = !todo.isDone
         }
     }
     //Render application todos based on filters
-let renderTodos = function(todos, textFilter) {
+let renderTodos = (todos, textFilter) => {
     document.querySelector("#myTodos").textContent = "";
-    let filteredItems = todos.filter(function(item) {
-        let hasText = item.title.toLowerCase().includes(textFilters.searchText);
-        //include if it has the text value we filtered on
-        return hasText;
-    });
+    let filteredItems = todos.filter((item) => item.title.toLowerCase().includes(textFilters.searchText));
+
     if (textFilters.hideCompleted) {
         //filter out completed items in place (filter and assign back to same variable)
-        filteredItems = filteredItems.filter(function(item) {
-            return !item.isDone;
-        });
+        filteredItems = filteredItems.filter((item) => !item.isDone);
+
     }
     generateTodoDOM(filteredItems);
 };
@@ -47,12 +40,12 @@ let renderTodos = function(todos, textFilter) {
 //4. Setup and append a button (set text)
 
 //Get the DOM elements for an individual note
-let generateTodoDOM = function(filteredList) {
+let generateTodoDOM = (filteredList) => {
     if (filteredList == undefined) {
         console.log("generateTodoDOM: No filteredlist to print");
     } else {
         generateSummaryDOM(filteredList.length);
-        filteredList.forEach(function(item) {
+        filteredList.forEach((item) => {
             //Setup the pieces to create a single line checkbox with the text title
             const rootDiv = document.createElement("div"); //element to hold our todo with checkbox in it on one line
             const mySpan = document.createElement("span");
@@ -65,15 +58,7 @@ let generateTodoDOM = function(filteredList) {
 
             thisCheckBox.checked = item.isDone
             thisCheckBox.id = item.uuid
-            thisCheckBox.addEventListener('change', function(e) {
-                    // //find this todos in memory based on the uuid of the checkbox
-                    // let noteIndex = function() {
-                    //         return todos.findIndex(function(element) {
-                    //             return element.uuid == thisCheckBox.id
-                    //         })
-                    //     }
-                    //     //update that todo in array with the current checkbox value
-                    // todos[noteIndex()].isDone = e.target.checked
+            thisCheckBox.addEventListener('change', (e) => {
 
                     toggleTodo(item.uuid)
                     saveTodos()
@@ -89,7 +74,7 @@ let generateTodoDOM = function(filteredList) {
 };
 
 //Get the Dom elements for the list summary
-let generateSummaryDOM = function(count) {
+let generateSummaryDOM = (count) => {
     let summaryEl = document.createElement("h2");
     summaryEl.textContent = `You have ${count} items left to do`;
     document.querySelector("#myTodos").appendChild(summaryEl);

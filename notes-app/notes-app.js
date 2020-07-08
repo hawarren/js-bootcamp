@@ -9,19 +9,19 @@ const filters = {
 
 renderNotes(notes, filters)
 
-document.querySelector('#create-note').addEventListener('submit', function(event) {
+document.querySelector('#create-note').addEventListener('submit', (event) => {
     debugger
     addNotes(event.target.elements.inputTitle, event.target.elements.inputBody)
 
     event.target.textContent = 'Note Added'
 })
 
-document.querySelector('#search-text').addEventListener('input', function(e) {
+document.querySelector('#search-text').addEventListener('input', (e) => {
     console.log(e.target.value)
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
-document.querySelector('#name-form').addEventListener('submit', function(e) {
+document.querySelector('#name-form').addEventListener('submit', (e) => {
     e.preventDefault() //keeps form from being submitted to server (ie the default behavior of submit)
     console.log(e.target.elements.inputTitle.value) //
     console.log(e.target.elements.inputBody.value) //
@@ -41,7 +41,7 @@ document.querySelector('#name-form').addEventListener('submit', function(e) {
     location.assign(`./edit.html#${newID}`)
 })
 
-document.querySelector('#sortStyle').addEventListener('change', function(e) {
+document.querySelector('#sortStyle').addEventListener('change', (e) => {
     console.log(e.target.value) //print the selected item in dropdown
     filters.sortBy = e.target.value
         //resort the list in place
@@ -50,7 +50,7 @@ document.querySelector('#sortStyle').addEventListener('change', function(e) {
     renderNotes(notes, filters)
 
 })
-window.addEventListener('storage', function(e) {
+window.addEventListener('storage', (e) => {
     this.window.console.log('Values changed')
     debugger
     if (e.key === 'storedNotes') {
