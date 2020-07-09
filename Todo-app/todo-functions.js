@@ -1,12 +1,9 @@
 //fetch todos from local storage
 let getSavedTodos = () => {
     let todosJson = localStorage.getItem("todos");
-    if (todosJson != null) {
-        return JSON.parse(todosJson);
-    } else {
-        return [];
-    }
-};
+    return todosJson != null ? JSON.parse(todosJson) : [];
+}
+
 
 //Save todos to local storage
 const saveTodos = () => {
@@ -14,14 +11,13 @@ const saveTodos = () => {
     localStorage.setItem("todos", todosJson);
 };
 const toggleTodo = (id) => {
-        //finds reference to my todo object within the array    
-        const todo = todos.find((todo) => todo.uuid === id)
-            //update the todo item via the reference we just grabbed
-        if (todo !== undefined) {
-            todo.isDone = !todo.isDone
-        }
-    }
-    //Render application todos based on filters
+    //finds reference to my todo object within the array    
+    const todo = todos.find((todo) => todo.uuid === id)
+        //update the todo item via the reference we just grabbed
+    todo.isDone = todo !== undefined ? !todo.isDone : !todo.isDone
+}
+
+//Render application todos based on filters
 let renderTodos = (todos, textFilter) => {
     document.querySelector("#myTodos").textContent = "";
     let filteredItems = todos.filter((item) => item.title.toLowerCase().includes(textFilters.searchText));

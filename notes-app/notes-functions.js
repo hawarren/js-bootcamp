@@ -2,10 +2,8 @@
 //get saved notes
 let getSavedNotes = () => {
     let storedNotes = localStorage.getItem('storedNotes')
-    if (storedNotes == "undefined" || storedNotes == null)
-        return []
-    let JSONstoredNotes = JSON.parse(storedNotes)
-    return JSONstoredNotes;
+    return storedNotes == "undefined" ? [] : JSON.parse(storedNotes)
+
 };
 
 let addNotes = (newTitle, newBody) => {
@@ -124,7 +122,7 @@ let generateSummaryDom = (count) => {
 };
 
 let removeNote = (noteToRemove) => {
-    let foundNote = notes.findIndex((note) => element.id == noteToRemove.id)
+    let foundNote = notes.findIndex((element) => element.id == noteToRemove.id)
     if (foundNote != -1) {
         console.log(`Removing ${notes[foundNote].title}`)
         notes.splice(foundNote, 1)
