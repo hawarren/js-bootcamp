@@ -10,7 +10,7 @@ let note = notes.find((item) => noteId === item.id)
 
 let renderThisNote = () => {
     //kick back to index  if note is not found
-    if (note === undefined) {
+    if (!note) {
         location.assign('./index.html')
     }
     let timeAgo = moment(note.updatedAt).fromNow()
@@ -47,4 +47,8 @@ window.addEventListener('storage', (e) => {
     debugger
     if (e.key === 'storedNotes')
         renderThisNote()
+        //redirect them if we don't find any note)
+    if (!note) {
+        location.assign('/index.html')
+    }
 })

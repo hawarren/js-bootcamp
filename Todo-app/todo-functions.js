@@ -37,7 +37,7 @@ let renderTodos = (todos, textFilter) => {
 
 //Get the DOM elements for an individual note
 let generateTodoDOM = (filteredList) => {
-    if (filteredList == undefined) {
+    if (!filteredList) {
         console.log("generateTodoDOM: No filteredlist to print");
     } else {
         generateSummaryDOM(filteredList.length);

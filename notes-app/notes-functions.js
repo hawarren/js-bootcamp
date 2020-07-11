@@ -2,7 +2,7 @@
 //get saved notes
 let getSavedNotes = () => {
     let storedNotes = localStorage.getItem('storedNotes')
-    return storedNotes == "undefined" ? [] : JSON.parse(storedNotes)
+    return storedNotes ? JSON.parse(storedNotes) : []
 
 };
 
@@ -19,7 +19,7 @@ let addNotes = (newTitle, newBody) => {
 };
 //Save notes
 let saveNotes = (notesToSave) => {
-    if (notesToSave == undefined) {
+    if (!notesToSave) {
         console.log('No notes to save')
         return
     }
@@ -92,7 +92,7 @@ let generateNoteDom = (notes) => {
             //add checkbox and x button for each div
         let newCheckBox = document.createElement('input');
         newCheckBox.setAttribute('type', 'checkbox')
-            // if (note.)
+
         newCheckBox.checked = true
         newCheckBox.addEventListener('input', (e) => {
             console.log(note)
