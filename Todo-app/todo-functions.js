@@ -1,7 +1,11 @@
 //fetch todos from local storage
 let getSavedTodos = () => {
-    let todosJson = localStorage.getItem("todos");
-    return todosJson != null ? JSON.parse(todosJson) : [];
+    try {
+        let todosJson = localStorage.getItem("todos");
+        return todosJson != null ? JSON.parse(todosJson) : [];
+    } catch (e) {
+        return []
+    }
 }
 
 

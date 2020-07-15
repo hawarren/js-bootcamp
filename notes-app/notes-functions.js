@@ -1,8 +1,12 @@
 //create the following functions
 //get saved notes
 let getSavedNotes = () => {
-    let storedNotes = localStorage.getItem('storedNotes')
-    return storedNotes ? JSON.parse(storedNotes) : []
+    try {
+        let storedNotes = localStorage.getItem('storedNotes')
+        return storedNotes ? JSON.parse(storedNotes) : []
+    } catch () {
+        return []
+    }
 
 };
 
