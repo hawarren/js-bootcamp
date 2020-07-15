@@ -1,6 +1,7 @@
+'use strict'
 //DOM - Document Object Model (a document that is modelled like an object, with methods and properties)
 //the object is called "document"
-notes = getSavedNotes();
+let notes = getSavedNotes();
 
 const filters = {
     searchText: '',

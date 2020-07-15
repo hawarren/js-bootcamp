@@ -1,3 +1,4 @@
+'use strict'
 //fetch todos from local storage
 let getSavedTodos = () => {
     try {

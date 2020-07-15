@@ -1,10 +1,19 @@
+'use strict'
+//errors on things like leaked global, where variable is used but not declared, thus attaching to the window object
+let data = 0
+const processData = () => {
+    data = '123454431'
+}
+processData()
+console.log(data)
+
 //create the following functions
 //get saved notes
 let getSavedNotes = () => {
     try {
         let storedNotes = localStorage.getItem('storedNotes')
         return storedNotes ? JSON.parse(storedNotes) : []
-    } catch () {
+    } catch (e) {
         return []
     }
 
