@@ -1,7 +1,7 @@
-const Person = function(firstName) {
+const Person = function(firstName, lastName, age) {
     this.firstName = firstName
-    this.lastName = arguments[1]
-    this.age = arguments[2]
+    this.lastName = lastName
+    this.age = age
 }
 
 //new generates new empty object
