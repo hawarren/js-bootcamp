@@ -1,12 +1,12 @@
 //Prototypal Inheritance
-const Person = function(firstName, lastName, age, likes) {
+const Person = function(firstName, lastName, age, likes = []) {
     this.firstName = firstName
     this.lastName = lastName
     this.age = age
     this.likes = likes
 }
 Person.prototype.getBio = function() {
-    let bio = `${this.firstName} is ${this.age} and`
+    let bio = `${this.firstName} is ${this.age}.`
     this.likes.forEach((like) => {
         bio += ` ${this.firstName} likes ${like}.` //can use the "this" in arrow function, not in function declaration
     });
