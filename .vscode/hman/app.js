@@ -23,3 +23,4 @@ console.log(product)
 //Boolean: myBoolean --> Boolean.prototype --> Object.prototype --> null
 const otherProduct = new String('Phone')
 console.log(otherProduct)
+    //test commit
