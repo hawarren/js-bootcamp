@@ -22,6 +22,7 @@ const HangManGame = function(word, guessesAllowed) {
         this.wordTable[item.charCodeAt(0) % 97] = item; //hash each item by it's charcode
     });
     this.guessesAllowed = guessesAllowed;
+    this.status = 'Playing'
 };
 
 HangManGame.prototype.getPuzzleResultUsingHash = function() {
@@ -51,13 +52,13 @@ HangManGame.prototype.getPuzzleResultUsingHash = function() {
 };
 
 HangManGame.prototype.getPuzzleResult = function() {
-    let wordScore = [];
+    let wordScore = '';
     console.log(`getPuzzleResult(): You have ${this.guessesAllowed} guesses left`)
     this.word.forEach((item) => {
         if (this.guessedLetters.includes(item)) {
-            wordScore.push(item)
+            wordScore += item
         } else {
-            wordScore.push("*")
+            wordScore += "*"
         }
     })
 
