@@ -94,3 +94,40 @@ HangManGame.prototype.makeGuess = function(letter) {
     }
 
 };
+
+HangManGame.prototype.checkGameStatus = function() {
+    let letterMissed = false
+        //check if playing
+    if (this.guessesAllowed > 0) {
+        this.status = 'able to play!'
+    }
+    if (this.guessesAllowed <= 0) {
+        this.status = 'failed'
+        console.log(`checkGameStatus: ${this.status}`)
+        return
+    }
+
+    if (!this.word.every(element => this.guessedLetters.includes(element))) {
+        letterMissed = true
+
+    }
+    //check if finished
+    // if (this.guessedLetters.length > 0) {
+    //     let letterMissed = false;
+    //     this.word.forEach((element) => {
+    //         if (this.guessedLetters.includes(element)) {
+
+    //         } else {
+    //             letterMissed = true;
+    //         }
+    //     });
+
+
+    if (letterMissed) {
+        this.status = 'Playing!'
+
+    } else {
+        this.status = 'Finished';
+    }
+    console.log(`checkGameStatus: ${this.status}`)
+}
