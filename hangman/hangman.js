@@ -1,3 +1,10 @@
+//challenge 98
+//1.Disable new guesses unless playing
+//2.Setup a new method to get back a status message
+//playing -> guesses left: 3
+//failed -> nice try! the word was "cat"
+//finished -> Great work! You guessed the word
+
 //challenge 97
 //1.Display the puzzle to the browser instead of the console
 //2. Display the guesses left to the browser instead of the consoel
@@ -95,39 +102,38 @@ HangManGame.prototype.makeGuess = function(letter) {
 
 };
 
-HangManGame.prototype.checkGameStatus = function() {
+HangManGame.prototype.calculateStatus = function() {
     let letterMissed = false
+        //check if they've won already
+    if (!this.word.every(element => this.guessedLetters.includes(element))) {
+        letterMissed = true
+    }
+
+    if (letterMissed) {
+        this.status = 'Playing'
+    } else {
+        this.status = 'Finished';
+        return
+    }
+    console.log(`checkGameStatus: ${this.status}`)
         //check if playing
-    if (this.guessesAllowed > 0) {
-        this.status = 'able to play!'
+    if (this.guessesAllowed > 0 && letterMissed) {
+        this.status = 'Playing'
     }
     if (this.guessesAllowed <= 0) {
         this.status = 'failed'
-        console.log(`checkGameStatus: ${this.status}`)
+        console.log(`HangManGame.prototype.calculateStatus = function() {
+            : ${this.status}`)
         return
     }
-
-    if (!this.word.every(element => this.guessedLetters.includes(element))) {
-        letterMissed = true
-
+}
+HangManGame.prototype.getStatus = function() {
+    if (this.status == 'Finished') {
+        return `Good job! You guessed the word was ${this.word.join('')}`
+    } else if (this.status == 'Playing') {
+        return `Still playing, guesses left: ${this.guessesAllowed}`
+    } else if (this.status == 'failed') {
+        return 'Nice try but game over'
     }
-    //check if finished
-    // if (this.guessedLetters.length > 0) {
-    //     let letterMissed = false;
-    //     this.word.forEach((element) => {
-    //         if (this.guessedLetters.includes(element)) {
 
-    //         } else {
-    //             letterMissed = true;
-    //         }
-    //     });
-
-
-    if (letterMissed) {
-        this.status = 'Playing!'
-
-    } else {
-        this.status = 'Finished';
-    }
-    console.log(`checkGameStatus: ${this.status}`)
 }

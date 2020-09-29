@@ -14,7 +14,7 @@ console.log(exampleFour);
 // console.log(exampleFour.getPuzzleResult());
 // console.log(exampleFour);
 // console.log('Try another guess')
-exampleFour.makeGuess("z");
+// exampleFour.makeGuess("z");
 /* console.log("After bad guess");
 // console.log(exampleFour.getPuzzleResult());
 console.log(exampleFour);
@@ -22,22 +22,27 @@ console.log(exampleFour);
 window.addEventListener("keypress", function(e) {
     const guess = String.fromCharCode(e.charCode);
     console.log(`guessing ${guess}`);
-
-    exampleFour.makeGuess(String.fromCharCode(e.charCode));
-    renderPuzzle(exampleFour.getPuzzleResult());
+    if (exampleFour.status == 'Playing') {
+        exampleFour.makeGuess(String.fromCharCode(e.charCode));
+        renderPuzzle(exampleFour.getPuzzleResult());
+    }
 });
 
 const renderPuzzle = function(myPuzzle) {
-    const vDom = document.getElementById("hResult");
+    exampleFour.calculateStatus();
+    const vDom = document.getElementById('hResult');
+    const pResultDom = document.createElement('div');
+    const statusDom = document.createElement('div')
     vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
-    const pResultDom = document.createElement("div");
     pResultDom.innerText = `The puzzle result is ${myPuzzle}`;
+    statusDom.innerText = exampleFour.getStatus()
     vDom.appendChild(pResultDom);
-    exampleFour.checkGameStatus();
+    vDom.appendChild(statusDom)
 };
 
-const vDom = document.getElementById("hResult");
-vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
-const pResultDom = document.createElement("div");
-pResultDom.innerText = `The puzzle result is ${exampleFour.getPuzzleResult()}`;
-vDom.appendChild(pResultDom);
+renderPuzzle(exampleFour.getPuzzleResult());
+// const vDom = document.getElementById("hResult");
+// vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
+// const pResultDom = document.createElement("div");
+// pResultDom.innerText = `The puzzle result is ${exampleFour.getPuzzleResult()}`;
+// vDom.appendChild(pResultDom);
