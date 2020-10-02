@@ -22,10 +22,11 @@ console.log(exampleFour);
 window.addEventListener("keypress", function(e) {
     const guess = String.fromCharCode(e.charCode);
     console.log(`guessing ${guess}`);
-    if (exampleFour.status == 'Playing') {
-        exampleFour.makeGuess(String.fromCharCode(e.charCode));
-        renderPuzzle(exampleFour.getPuzzleResult());
+    if (exampleFour.status !== 'Playing') {
+        return
     }
+    exampleFour.makeGuess(String.fromCharCode(e.charCode));
+    renderPuzzle(exampleFour.getPuzzleResult());
 });
 
 const renderPuzzle = function(myPuzzle) {
