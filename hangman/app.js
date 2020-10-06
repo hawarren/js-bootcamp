@@ -36,12 +36,12 @@ const renderPuzzle = function(myPuzzle) {
     const statusDom = document.createElement('div')
     vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
     pResultDom.innerText = `The puzzle result is ${myPuzzle}`;
-    statusDom.innerText = exampleFour.getStatus()
+    statusDom.innerText = exampleFour.statusMessage
     vDom.appendChild(pResultDom);
     vDom.appendChild(statusDom)
 };
 
-renderPuzzle(exampleFour.getPuzzleResult());
+renderPuzzle(exampleFour.puzzle);
 // const vDom = document.getElementById("hResult");
 // vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
 // const pResultDom = document.createElement("div");

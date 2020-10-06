@@ -17,6 +17,16 @@ class Person {
         this.firstName = names[0]
         this.lastName = names[1]
     }
+    set fullName(fullname) {
+        const names = fullname.split(' ')
+        this.firstName = names[0]
+        this.lastName = names[1]
+    }
+    get fullName() {
+        return `the full name is ${this.firstName} + ${this.lastName}`
+        this.firstName = names[0]
+        this.lastName = names[1]
+    }
 
 }
 
@@ -28,6 +38,7 @@ class Employee extends Person {
     getBio() {
         return `${this.firstName} ${this.lastName} is a ${this.position}`
     }
+
 }
 class Student extends Person {
     constructor(firstName, lastName, age, grade, likes) {
@@ -56,6 +67,9 @@ class Student extends Person {
 //Print status (failing or passing)
 //Change grade to change status
 testStudent = new Student('Hanif', 'Asim', 39, 72, ['Growth', 'Studying'])
+console.log(testStudent.fullName)
+testStudent.fullName = 'Barack Obama'
+console.log(testStudent.fullName)
 console.log(testStudent.getBio())
 testStudent.updateGrade(-71)
 console.log(testStudent.getBio())

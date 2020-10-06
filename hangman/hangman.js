@@ -1,3 +1,7 @@
+//1.Convert "getStatusMessage" to a custom getter for "statusMessage"
+//2.Convert getPuzzleResult to a custom getter for "puzzle"
+//change usage in app.js
+
 class HangManGame {
     constructor(word, guessesAllowed) {
         this.word = word.toLowerCase().split(""); //convet to lowercase array of characters
@@ -11,6 +15,32 @@ class HangManGame {
         this.guessesAllowed = guessesAllowed;
         this.status = "Playing";
     };
+    get puzzle() {
+        let wordScore = "";
+        console.log(`getPuzzleResult(): You have ${this.guessesAllowed} guesses left`);
+        this.word.forEach((item) => {
+            if (this.guessedLetters.includes(item)) {
+                wordScore += item;
+            } else {
+                wordScore += "*";
+            }
+        });
+        console.log(`wordScore is ${wordScore}`);
+        return wordScore;
+
+    }
+
+    get statusMessage() {
+        if (this.status == "Finished") {
+            return `Good job! You guessed the word was ${this.word.join("")}`;
+        } else if (this.status == "Playing") {
+            return `Still playing, guesses left: ${this.guessesAllowed}`;
+        } else if (this.status == "failed") {
+            return `Nice try but game over"${this.word.join("")}"`;
+        }
+    };
+
+
     getPuzzleResult() {
         let wordScore = "";
         console.log(
