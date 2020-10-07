@@ -5,13 +5,7 @@
 class HangManGame {
     constructor(word, guessesAllowed) {
         this.word = word.toLowerCase().split(""); //convet to lowercase array of characters
-        this.guessedLetters = []; //['a', 'b', 'c']
-        var arraysize = this.guessedLetters.sort();
-        // this.wordTable = new Array(this.guessedLetters.sort().charCodeAt((guessesAllowed.length - 1) % 97)) // New empty array, sized to fit the highest letter
-        this.wordTable = new Array(97);
-        this.word.forEach((item) => {
-            this.wordTable[item.charCodeAt(0) % 97] = item; //hash each item by it's charcode
-        });
+        this.guessedLetters = []; //['a', 'b', 'c']        
         this.guessesAllowed = guessesAllowed;
         this.status = "Playing";
     };
@@ -41,21 +35,6 @@ class HangManGame {
     };
 
 
-    getPuzzleResult() {
-        let wordScore = "";
-        console.log(
-            `getPuzzleResult(): You have ${this.guessesAllowed} guesses left`
-        );
-        this.word.forEach((item) => {
-            if (this.guessedLetters.includes(item)) {
-                wordScore += item;
-            } else {
-                wordScore += "*";
-            }
-        });
-        console.log(`wordScore is ${wordScore}`);
-        return wordScore;
-    };
     makeGuess(letter) {
         if (this.guessesAllowed <= 0) {
             console.log("No more guessses Allowed!");
@@ -84,7 +63,7 @@ class HangManGame {
     calculateStatus() {
         let letterMissed = false;
         //check if they've won already
-        if (!this.word.every((element) => this.guessedLetters.includes(element))) {
+        if (!this.word.every((element) => this.guessedLetters.includes(element) || element === ' ')) {
             letterMissed = true;
         }
 
@@ -106,15 +85,7 @@ class HangManGame {
             return;
         }
     };
-    getStatus() {
-        if (this.status == "Finished") {
-            return `Good job! You guessed the word was ${this.word.join("")}`;
-        } else if (this.status == "Playing") {
-            return `Still playing, guesses left: ${this.guessesAllowed}`;
-        } else if (this.status == "failed") {
-            return `Nice try but game over"${this.word.join("")}"`;
-        }
-    };
+
 }
 HangManGame.prototype.getPuzzleResultUsingHash = function() {
     let wordScore = [];

@@ -6,7 +6,7 @@
 
 
 // console.log("Adding guess tracking /r/n");
-const exampleFour = new HangManGame("Lipid", 5);
+const exampleFour = new HangManGame("Lipid is a fat", 5);
 // console.log("before guess");
 console.log(exampleFour);
 
@@ -26,7 +26,7 @@ window.addEventListener("keypress", function(e) {
         return
     }
     exampleFour.makeGuess(String.fromCharCode(e.charCode));
-    renderPuzzle(exampleFour.getPuzzleResult());
+    renderPuzzle(exampleFour.puzzle);
 });
 
 const renderPuzzle = function(myPuzzle) {
