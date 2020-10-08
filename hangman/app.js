@@ -1,24 +1,13 @@
-/*1.Setup new "status" property with initial value of "playing"
-2. Create method for recalculating status to "playing","finished",or "failed".
-3. Call that Method after a guess is processed
-4.Use console.log to print the status
-*/
+//HTTP (HypterText Transfer Protocol)
+//Request = What do we want to do
+//Response- The answer we get back
 
 
-// console.log("Adding guess tracking /r/n");
+
 const exampleFour = new HangManGame("Lipid is a fat", 5);
-// console.log("before guess");
+
 console.log(exampleFour);
 
-// console.log("After good guess");
-// console.log(exampleFour.getPuzzleResult());
-// console.log(exampleFour);
-// console.log('Try another guess')
-// exampleFour.makeGuess("z");
-/* console.log("After bad guess");
-// console.log(exampleFour.getPuzzleResult());
-console.log(exampleFour);
-*/
 window.addEventListener("keypress", function(e) {
     const guess = String.fromCharCode(e.charCode);
     console.log(`guessing ${guess}`);
@@ -40,10 +29,20 @@ const renderPuzzle = function(myPuzzle) {
     vDom.appendChild(pResultDom);
     vDom.appendChild(statusDom)
 };
-
 renderPuzzle(exampleFour.puzzle);
-// const vDom = document.getElementById("hResult");
-// vDom.innerText = `You are allowed ${exampleFour.guessesAllowed} guesses`;
-// const pResultDom = document.createElement("div");
-// pResultDom.innerText = `The puzzle result is ${exampleFour.getPuzzleResult()}`;
-// vDom.appendChild(pResultDom);
+
+
+
+//Making an HTTP request
+const request = new XMLHttpRequest()
+
+request.addEventListener('readystatechange', (e) => {
+    if (e.target.readyState === 4) {
+        const data = JSON.parse(e.target.responseText)
+        console.log(data)
+    }
+
+})
+
+request.open('GET', 'http://puzzle.mead.io/puzzle')
+request.send()
