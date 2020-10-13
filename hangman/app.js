@@ -16,6 +16,9 @@ window.addEventListener("keypress", function(e) {
     renderPuzzle(exampleFour.puzzle);
 });
 
+// const puzzle = getPuzzle()
+// console.log(puzzle)
+
 const renderPuzzle = (myPuzzle) => {
     exampleFour.calculateStatus();
     const vDom = document.getElementById('hResult');
@@ -29,26 +32,14 @@ const renderPuzzle = (myPuzzle) => {
 };
 renderPuzzle(exampleFour.puzzle);
 
-
-
-//Making an HTTP request
-const request = new XMLHttpRequest()
-
-request.addEventListener('readystatechange', (e) => {
-    if (e.target.readyState === 4 && e.target.status === 200) {
-        console.log(e.target.status)
-        const data = JSON.parse(e.target.responseText)
-        console.log(data)
-    } else if (e.target.readyState === 4) {
-        console.log('An error has taken place')
+getPuzzle((error, puzzle) => {
+    if (error) {
+        console.log('Error: ${error}')
+    } else {
+        console.log(`callback using the puzzle ${puzzle}`)
     }
 
 })
-
-request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
-request.send()
-
-
 
 //1. make a call to restcountries.eu/rest/v2
 //1. Make a new request for all countries
@@ -60,14 +51,15 @@ const countryRequest = new XMLHttpRequest()
 countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all')
 countryRequest.send()
 
+const countryCode = "MX"
+
 countryRequest.addEventListener('readystatechange', (e) => {
     if (e.target.readyState === 4 && e.target.status === 200) {
         console.log(e.target.status)
         const data = JSON.parse(e.target.responseText)
-        const myCountry = data.filter(item => {
-            return item.alpha2Code == "US"
-        })
-        console.log(`my country name is ${myCountry[0]['name']}`)
+        const myCountry = data.find((country) => country.alpha2Code === countryCode)
+        console.log(`my country name is ${myCountry['name']}`)
+            //console.log(`my country name is ${myCountry[0]['name']}`)
 
     }
 })
