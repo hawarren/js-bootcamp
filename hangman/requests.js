@@ -16,7 +16,34 @@ const getPuzzle = (callback) => {
         }
     })
 
-    request.open('GET', 'http://puzzle.mead.io/puzzle?wordCounta=3')
+    request.open('GET', 'http://puzzle.mead.io/puzzle?wordCount=3')
     request.send()
 
+}
+
+const getCountry = (codeToGet, callback) => {
+    const countryRequest = new XMLHttpRequest()
+    countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all')
+    countryRequest.send()
+    const countryCode = codeToGet
+
+    countryRequest.addEventListener('readystatechange', (e) => {
+        if (e.target.readyState === 4 && e.target.status === 200) {
+            console.log(e.target.status)
+            const data = JSON.parse(e.target.responseText)
+            const myCountry = data.find((country) => {
+                return country.alpha2Code === countryCode
+            })
+            if (myCountry) {
+                console.log(myCountry)
+                    // console.log(`my country name is ${myCountry['name']}`)
+                    //console.log(`my country name is ${myCountry[0]['name']}`)
+                callback(undefined, myCountry['name'])
+            } else {
+                callback('No country found')
+            }
+        } else {
+            callback('There was an error', undefined)
+        }
+    })
 }
