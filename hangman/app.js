@@ -1,10 +1,26 @@
 //HTTP (HypterText Transfer Protocol)
 //Request = What do we want to do
 //Response- what was actually done
+//let currentPuzzleWord = "Lipid is a fat"
+let realPuzzleWord = ''
+    // const currentPuzzleWord =
+getPuzzle(3, (error, puzzle) => {
+        if (error) {
+            console.log(`Error: ${error}`)
+                // //return 'Aww the game is broken'
+        } else {
+            console.log(`callback using the puzzle ${puzzle}`)
+            realPuzzleWord = puzzle
+        }
+    })
+    // console.log(` fuck this (line 14 app.js) ${currentPuzzleWord}`)
 
-const exampleFour = new HangManGame("Lipid is a fat", 5);
-
-console.log(exampleFour);
+// const exampleFour = new HangManGame("Lipid is a fat", 5);
+if (realPuzzleWord) {
+    const exampleFour = new HangManGame(realPuzzleWord, 5)
+    console.log(`${realPuzzleWord}`)
+    console.log(exampleFour);
+}
 
 window.addEventListener("keypress", function(e) {
     const guess = String.fromCharCode(e.charCode);
@@ -30,18 +46,15 @@ const renderPuzzle = (myPuzzle) => {
     vDom.appendChild(pResultDom);
     vDom.appendChild(statusDom)
 };
-renderPuzzle(exampleFour.puzzle);
+if (realPuzzleWord) {
+    console.log(`is the the real puzzle word? ${realPuzzleWord}`)
+    renderPuzzle(exampleFour.puzzle);
+}
+console.log('this is the last line of app.js')
 
-getPuzzle((error, puzzle) => {
-        if (error) {
-            console.log(`Error: ${error}`)
-        } else {
-            console.log(`callback using the puzzle ${puzzle}`)
-        }
-    })
-    // console.log('Do something else')
-    // const puzzle = getPuzzleSync();
-    // console.log(puzzle)
+// console.log('Do something else')
+// const puzzle = getPuzzleSync();
+// console.log(puzzle)
 
 
 //1.Create a function for getting the country details
@@ -49,10 +62,10 @@ getPuzzle((error, puzzle) => {
 //3.Make the HTTP request and call the callback with country information
 //4. Use the callback to print the country name
 
-getCountry('JJ', (error, countryCode) => {
-    if (error) {
-        console.log(`This is the Error: ${error}`)
-    } else {
-        console.log(`This is the country code ${countryCode}`)
-    }
-})
+//getCountry('US', (error, countryCode) => {
+//     if (error) {
+//         console.log(`This is the Error: ${error}`)
+//     } else {
+//         console.log(`This is the country code ${countryCode}`)
+//     }
+// })

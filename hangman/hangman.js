@@ -4,7 +4,7 @@
 
 class HangManGame {
     constructor(word, guessesAllowed) {
-        this.word = word.toLowerCase().split(""); //convet to lowercase array of characters
+        this.word = word != undefined ? word.toLowerCase().split("") : 'NOWORD'; //convet to lowercase array of characters
         this.guessedLetters = []; //['a', 'b', 'c']        
         this.guessesAllowed = guessesAllowed;
         this.status = "Playing";
