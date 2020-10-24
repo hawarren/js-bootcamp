@@ -3,7 +3,13 @@
 //Response- what was actually done
 //let currentPuzzleWord = "Lipid is a fat"
 let realPuzzleWord = ''
-    // const currentPuzzleWord =
+
+realPuzzleWord = "lipid is a fat"
+const exampleFour = new HangManGame(realPuzzleWord, 5)
+console.log(`${realPuzzleWord}`)
+console.log(exampleFour);
+
+// const currentPuzzleWord =
 getPuzzle(3, (error, puzzle) => {
         if (error) {
             console.log(`Error: ${error}`)
@@ -11,16 +17,15 @@ getPuzzle(3, (error, puzzle) => {
         } else {
             console.log(`callback using the puzzle ${puzzle}`)
             realPuzzleWord = puzzle
+            exampleFour.resetGame(puzzle)
+            renderPuzzle(realPuzzleWord)
         }
     })
     // console.log(` fuck this (line 14 app.js) ${currentPuzzleWord}`)
 
 // const exampleFour = new HangManGame("Lipid is a fat", 5);
-if (realPuzzleWord) {
-    const exampleFour = new HangManGame(realPuzzleWord, 5)
-    console.log(`${realPuzzleWord}`)
-    console.log(exampleFour);
-}
+
+
 
 window.addEventListener("keypress", function(e) {
     const guess = String.fromCharCode(e.charCode);

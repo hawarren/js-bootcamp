@@ -121,3 +121,10 @@ HangManGame.prototype.getPuzzleResultUsingHash = function() {
     console.log(`wordScore is ${wordScore}`);
     return wordScore;
 };
+HangManGame.prototype.resetGame = function(word, guessesAllowed) {
+    this.word = word != undefined ? word.toLowerCase().split("") : 'NOWORD'; //convet to lowercase array of characters
+    this.guessedLetters = []; //['a', 'b', 'c']        
+    // this.guessesAllowed = guessesAllowed;
+    this.status = "Playing";
+
+}
