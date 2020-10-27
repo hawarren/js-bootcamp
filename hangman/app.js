@@ -4,13 +4,14 @@
 //let currentPuzzleWord = "Lipid is a fat"
 let realPuzzleWord = ''
 
-realPuzzleWord = "lipid is a fat"
-const currentGame = new HangManGame(realPuzzleWord, 5)
+realPuzzleWord = "Default Hangman Guess"
+let currentGame = new HangManGame(realPuzzleWord, 5)
 console.log(`${realPuzzleWord}`)
 console.log(currentGame);
 
 getPuzzle(3).then((puzzle) => {
     console.log(`my promise returned this puzzle: ${puzzle}`)
+    currentGame = new HangManGame(puzzle, 5)
 }, (err) => { console.log(`Error in promise: ${err}`) })
 
 window.addEventListener("keypress", function(e) {
