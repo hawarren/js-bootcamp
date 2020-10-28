@@ -17,7 +17,7 @@ getDataCallback(2, (err, data) => {
             if (err) {
                 console.log(`this is the callback error: ${error}`)
             } else {
-                console.log(` my callback data ${data}`)
+                console.log(` my getData Callback data ${data}`)
             }
 
         })
@@ -30,7 +30,7 @@ const getDataPromise = (num) => new Promise((resolve, reject) => {
     }, 2000)
 })
 
-getDataPromise('10').then((data) => {
+getDataPromise(10).then((data) => {
     return getDataPromise(data)
 }).then((data) => {
     console.log(`this is final chained promise data ${data}`)

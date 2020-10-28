@@ -4,26 +4,43 @@
 //let currentPuzzleWord = "Lipid is a fat"
 let realPuzzleWord = ''
 
-realPuzzleWord = "Default Hangman Guess"
-let currentGame = new HangManGame(realPuzzleWord, 5)
+//realPuzzleWord = "Default Hangman Guess"
+let currentGame // = new HangManGame(realPuzzleWord, 5)
 console.log(`${realPuzzleWord}`)
 console.log(currentGame);
 
-getPuzzle(3).then((puzzle) => {
-    console.log(`my promise returned this puzzle: ${puzzle}`)
-    currentGame = new HangManGame(puzzle, 5)
-}, (err) => { console.log(`Error in promise: ${err}`) })
+// getPuzzle(3).then((puzzle) => {
+//     console.log(`my promise returned this puzzle: ${puzzle}`)
+//     currentGame = new HangManGame(puzzle, 5)
+// }, (err) => { console.log(`Error in promise: ${err}`) })
+
+
+
+getPuzzleFetch(5).then((puzzle) => {
+    console.log(`My fetch version of puzzle: ${puzzle}`)
+    currentGame = new HangManGame(puzzle, 10)
+    return currentGame
+
+}).then((currentGameNew) => {
+    renderPuzzle(currentGameNew.puzzle)
+}).catch((err) => {
+    console.log(`puzzleFetch returned an error ${err}`)
+})
+
+
 
 window.addEventListener("keypress", function(e) {
-    const guess = String.fromCharCode(e.charCode);
-    console.log(`guessing ${guess}`);
-    if (currentGame.status !== 'Playing') {
-        return
-    }
-    currentGame.makeGuess(String.fromCharCode(e.charCode));
-    renderPuzzle(currentGame.puzzle);
-});
+    if (currentGame) {
 
+        const guess = String.fromCharCode(e.charCode);
+        console.log(`guessing ${guess}`);
+        if (currentGame.status !== 'Playing') {
+            return
+        }
+        currentGame.makeGuess(String.fromCharCode(e.charCode));
+        renderPuzzle(currentGame.puzzle);
+    }
+});
 
 const renderPuzzle = (myPuzzle) => {
     currentGame.calculateStatus();
@@ -36,13 +53,29 @@ const renderPuzzle = (myPuzzle) => {
     vDom.appendChild(pResultDom);
     vDom.appendChild(statusDom)
 };
-if (realPuzzleWord) {
-    console.log(`is the the real puzzle word? ${realPuzzleWord}`)
-    renderPuzzle(currentGame.puzzle);
-}
-console.log('this is the last line of app.js')
+// if (realPuzzleWord.length > 0) {
+//     console.log(`is the the real puzzle word? ${realPuzzleWord}`)
+//     renderPuzzle(currentGame.puzzle);
+// }
+
 
 
 
 getCountry('US').then((countryCode) => console.log(`This is the country code ${countryCode}`),
     (err) => console.log(`This is the Error: ${error}`))
+
+// fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
+//     if (response.status === 200) {
+//         return response.json()
+//     } else {
+//         throw new Error('Unable to fetch the puzzle')
+//     }
+// }).then(
+//     (data) => {
+//         console.log(` puzzle from fetch method: ${data.puzzle}`)
+//     }
+// ).catch((error) => {
+//     console.log(error)
+// })
+
+console.log('this is the last line of app.js')

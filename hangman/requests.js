@@ -1,22 +1,31 @@
 const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest()
+    const request = new XMLHttpRequest()
 
-        request.addEventListener('readystatechange', (e) => {
-            if (e.target.readyState === 4 && e.target.status === 200) {
-                console.log(`this is the response status ${e.target.status}`)
-                const data = JSON.parse(e.target.responseText)
-                resolve(data.puzzle)
-                console.log(`this is logging the event listener: ${data.puzzle}`)
-            } else if (e.target.readyState === 4) {
-                reject('an error has taken place')
-                console.log(`An error has taken place with the api`)
-            }
-        })
-
-        request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
-        request.send()
+    request.addEventListener('readystatechange', (e) => {
+        if (e.target.readyState === 4 && e.target.status === 200) {
+            console.log(`this is the response status ${e.target.status}`)
+            const data = JSON.parse(e.target.responseText)
+            resolve(data.puzzle)
+            console.log(`this is logging the event listener: ${data.puzzle}`)
+        } else if (e.target.readyState === 4) {
+            reject('an error has taken place')
+            console.log(`An error has taken place with the api`)
+        }
     })
-    // Making an HTTP request
+
+    request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    request.send()
+})
+
+const getPuzzleFetch = (wordCount) => {
+    return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`).then((response) => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw new Error('Unable to fetch puzzle');
+        }
+    })
+}
 
 
 
