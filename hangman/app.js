@@ -5,7 +5,8 @@
 let realPuzzleWord = ''
 
 realPuzzleWord = "Default Hangman Guess"
-let currentGame = new HangManGame(realPuzzleWord, 5)
+    //let currentGame = new HangManGame(realPuzzleWord, 5)
+let currentGame = null
 console.log(`${realPuzzleWord}`)
 console.log(currentGame);
 
@@ -16,18 +17,21 @@ console.log(currentGame);
 
 
 
-getPuzzleFetch(5).then((data) => {
-    console.log(`My fetch version of puzzle: ${data.puzzle}}`)
-    currentGame = new HangManGame(data.puzzle, 10)
-        // return currentGame
-    console.log(`replaced currentGame with ${data.puzzle}`)
-    return currentGame
-}).then((currentGame) => {
-    renderPuzzle(currentGame.puzzle)
-    console.log(`rerendered currentGame with ${currentGame.puzzle}`)
-}).catch((err) => {
-    console.log(`puzzleFetch returned an error ${err}`)
-})
+getPuzzleFetch(5)
+    .then((data) => {
+        console.log(`My fetch version of puzzle: ${data.puzzle}}`)
+        currentGame = new HangManGame(data.puzzle, 10)
+            // return currentGame
+        console.log(`replaced currentGame with ${data.puzzle}`)
+        return currentGame
+    })
+    .then((currentGame) => {
+        renderPuzzle(currentGame.puzzle)
+        console.log(`rerendered currentGame with ${currentGame.puzzle}`)
+    })
+    .catch((err) => {
+        console.log(`puzzleFetch returned an error ${err}`)
+    })
 
 
 
