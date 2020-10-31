@@ -30,12 +30,10 @@ const getPuzzleFetch = (wordCount) => {
 
 
 
-const getCountry = (codeToGet) => new Promise((resolve, reject) => {
+const getCountry = (countryCode) => new Promise((resolve, reject) => {
     const countryRequest = new XMLHttpRequest()
     countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all')
     countryRequest.send()
-    const countryCode = codeToGet
-
     countryRequest.addEventListener('readystatechange', (e) => {
         if (e.target.readyState === 4 && e.target.status === 200) {
             console.log(e.target.status)
@@ -44,15 +42,11 @@ const getCountry = (codeToGet) => new Promise((resolve, reject) => {
                 return country.alpha2Code === countryCode
             })
             if (myCountry) {
-                console.log(myCountry)
-                    // console.log(`my country name is ${myCountry['name']}`)
-                    //console.log(`my country name is ${myCountry[0]['name']}`)
+                console.table(myCountry)
                 resolve(myCountry['name'])
             } else {
                 reject('No country found')
             }
-        } else {
-            // callback('There was an error', undefined)
         }
     })
 })

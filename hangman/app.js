@@ -4,8 +4,7 @@
 //let currentPuzzleWord = "Lipid is a fat"
 let realPuzzleWord = ''
 
-realPuzzleWord = "Default Hangman Guess"
-    //let currentGame = new HangManGame(realPuzzleWord, 5)
+
 let currentGame = null
 console.log(`${realPuzzleWord}`)
 console.log(currentGame);
@@ -67,8 +66,9 @@ const renderPuzzle = (myPuzzle) => {
 
 
 
-getCountry('US').then((countryCode) => console.log(`This is the country code ${countryCode}`),
-    (err) => console.log(`This is the Error: ${error}`))
+getCountry('US')
+    .then((countryCode) => console.log(`This is the country code ${countryCode}`),
+        (err) => console.log(`This is the Error: ${error}`))
 
 // fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
 //     if (response.status === 200) {
