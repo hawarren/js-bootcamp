@@ -66,13 +66,13 @@ const renderPuzzle = (myPuzzle) => {
 
 
 
-getCountry('US')
-    .then((countryCode) => console.log(`This is the country code ${countryCode}`),
-        (err) => console.log(`This is the Error: ${error}`))
+// getCountry('US')
+//     .then((countryCode) => console.log(`This is the country code ${countryCode}`),
+//         (err) => console.log(`This is the Error: ${error}`))
 
 // fetch('http://puzzle.mead.io/puzzle', {}).then((response) => {
 //     if (response.status === 200) {
-//         return response.json()
+//         return response.json() //this returns a promise
 //     } else {
 //         throw new Error('Unable to fetch the puzzle')
 //     }
@@ -85,3 +85,24 @@ getCountry('US')
 // })
 
 console.log('this is the last line of app.js')
+
+//convert getCountry to use fetch and return a promise
+//make sure getCountry still resolves with country that matches the country code
+//3. Change getCountry usage to use catch
+
+getCountryFetch('JM')
+    .then((cCode) => {
+        console.log(`My country code is ${cCode['name']}`)
+    })
+    .catch((error) => {
+        console.log(`getCountryFetch has an error ${error}`)
+    })
+
+//1. Crate getLocation function which takes no arguments
+//2. Setup getLocation to make a request to the url and parse the data
+//3. Use getLocation to print the city, region and country informtion
+getLocation().then((myLocation) => {
+    console.log(myLocation)
+}).catch((error) => {
+    console.log(`getLocation has an error ${error}`)
+})
