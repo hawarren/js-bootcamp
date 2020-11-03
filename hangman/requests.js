@@ -64,13 +64,13 @@ const getCountryFetch = (countryCode) => {
     })
 }
 const getLocation = () => {
-    return fetch('http://ipinfo.io/69.115.86.87?token=b34e67241780d0HW').then((response) => {
+    return fetch('http://ipinfo.io/69.115.86.87?token=b34e67241780d0 ').then((response) => {
         if (response.status === 200) {
             return response.json()
         } else {
             throw new Error('ip address locator failed')
         }
     }).then((location) => {
-        return `My city is ${location['city']}, my region is ${location['region']}, and my country is ${location['country']}`
+        return location
     })
 }

@@ -15,7 +15,7 @@ console.log(currentGame);
 // }, (err) => { console.log(`Error in promise: ${err}`) })
 
 
-
+/*
 getPuzzleFetch(5)
     .then((data) => {
         console.log(`My fetch version of puzzle: ${data.puzzle}}`)
@@ -31,7 +31,7 @@ getPuzzleFetch(5)
     .catch((err) => {
         console.log(`puzzleFetch returned an error ${err}`)
     })
-
+*/
 
 
 window.addEventListener("keypress", function(e) {
@@ -84,25 +84,33 @@ const renderPuzzle = (myPuzzle) => {
 //     console.log(error)
 // })
 
-console.log('this is the last line of app.js')
+
 
 //convert getCountry to use fetch and return a promise
 //make sure getCountry still resolves with country that matches the country code
 //3. Change getCountry usage to use catch
 
-getCountryFetch('JM')
-    .then((cCode) => {
-        console.log(`My country code is ${cCode['name']}`)
-    })
-    .catch((error) => {
-        console.log(`getCountryFetch has an error ${error}`)
-    })
+// getCountryFetch('JM')
+//     .then((cCode) => {
+//         console.log(`My country code is ${cCode['name']}`)
+//     })
+//     .catch((error) => {
+//         console.log(`getCountryFetch has an error ${error}`)
+//     })
 
 //1. Crate getLocation function which takes no arguments
 //2. Setup getLocation to make a request to the url and parse the data
 //3. Use getLocation to print the city, region and country informtion
 getLocation().then((myLocation) => {
-    console.log(myLocation)
-}).catch((error) => {
-    console.log(`getLocation has an error ${error}`)
-})
+        return myLocation
+    })
+    .then(
+        (data) => getCountryFetch(data['country'])
+    ).then((country) => {
+
+        console.log(`You are in the country ${country.name}`)
+    })
+    .catch((error) => {
+        console.log(`getLocation has an error ${error}`)
+    })
+    //use promise chaining to get loa
