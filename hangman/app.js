@@ -15,11 +15,11 @@ console.log(currentGame);
 // }, (err) => { console.log(`Error in promise: ${err}`) })
 
 
-/*
-getPuzzleFetch(5)
+
+getPuzzleFetchAsync(5)
     .then((data) => {
-        console.log(`My fetch version of puzzle: ${data.puzzle}}`)
-        currentGame = new HangManGame(data.puzzle, 10)
+        console.log(`My fetch version of puzzle: ${data}}`)
+        currentGame = new HangManGame(data, 10)
             // return currentGame
         console.log(`replaced currentGame with ${data.puzzle}`)
         return currentGame
@@ -31,7 +31,7 @@ getPuzzleFetch(5)
     .catch((err) => {
         console.log(`puzzleFetch returned an error ${err}`)
     })
-*/
+
 
 
 window.addEventListener("keypress", function(e) {
@@ -108,7 +108,7 @@ getLocation().then((myLocation) => {
         (data) => getCountryFetch(data['country'])
     ).then((country) => {
 
-        console.log(`You are in the country ${country.name}`)
+        console.log(`You are in the region ${country.region} and  country ${country.name}`)
     })
     .catch((error) => {
         console.log(`getLocation has an error ${error}`)
