@@ -38,7 +38,8 @@ const getPuzzleFetchAsync = async(wordCount) => {
     }
 }
 
-
+//change getou8ntry to use async/await
+//change get location to use async/await.
 const getCountry = (countryCode) => new Promise((resolve, reject) => {
     const countryRequest = new XMLHttpRequest()
     countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all')
@@ -59,18 +60,19 @@ const getCountry = (countryCode) => new Promise((resolve, reject) => {
         }
     })
 })
-const getCountryFetch = (countryCode) => {
-    return fetch('https://restcountries.eu/rest/v2/all').then((response) => {
-        if (response.status === 200) {
-            return response.json()
-        } else {
-            throw new Error('Unable to fetch countries')
-        }
-    }).then((mydata) => {
-        return mydata.find((country) => {
-            return country.alpha2Code === countryCode
-        })
+const getCountryFetch = async(countryCode) => {
+    let mydata = await fetch('https://restcountries.eu/rest/v2/all')
+    if (mydata.status === 200) {
+        mydata = await mydata.json()
+    } else {
+        throw new Error('Unable to fetch countries')
+    }
+
+    mydata = await mydata.find((country) => {
+        return country.alpha2Code === countryCode
     })
+    return mydata
+
 }
 const getLocation = () => {
     return fetch('http://ipinfo.io/69.115.86.87?token=b34e67241780d0 ').then((response) => {

@@ -24,10 +24,10 @@ const processDataNoAsync = async() => {
     return 12
 }
 
-/* 
+
 processDataNoAsync().then((data) => {
     console.log('data', data)
 }).catch((error) => {
     console.log('error', error)
+    processDataNoAsync()
 })
-*/
