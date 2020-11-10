@@ -74,14 +74,20 @@ const getCountryFetch = async(countryCode) => {
     return mydata
 
 }
-const getLocation = () => {
-    return fetch('http://ipinfo.io/69.115.86.87?token=b34e67241780d0 ').then((response) => {
+const getLocation = async() => {
+        const response = await fetch('http://ipinfo.io/69.115.86.87?token=b34e67241780d0')
         if (response.status === 200) {
-            return response.json()
+            const thisLocation = await response.json()
+            return thisLocation
         } else {
             throw new Error('ip address locator failed')
         }
-    }).then((location) => {
-        return location
-    })
+    }
+    //Create a new function called getCurrentCountry
+    //Should return a promise that resolves the country object for your current location
+    //use async/await for the new function
+const getCurrentCountry = async() => {
+    const myLoc = await getLocation();
+    return getCountryFetch(myLoc.country)
+
 }
