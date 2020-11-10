@@ -1,7 +1,7 @@
-//HTTP (HypterText Transfer Protocol)
-//Request = What do we want to do
-//Response- what was actually done
-//let currentPuzzleWord = "Lipid is a fat"
+const puzzleEl = document.getElementById("puzzleEl");
+const guessesEl = document.getElementById("guesses");
+const statusEl = document.getElementById("status")
+
 let realPuzzleWord = "";
 
 let currentGame = null;
@@ -21,50 +21,49 @@ getPuzzleFetchAsync(5)
         console.log(`replaced currentGame with ${data.puzzle}`);
         return currentGame;
     })
-    .then((currentGame) => {
-        renderPuzzle(currentGame.puzzle);
-        console.log(`rerendered currentGame with ${currentGame.puzzle}`);
-    })
+    // .then((currentGame) => {
+    //     renderPuzzle(currentGame.puzzle);
+    //     console.log(`rerendered currentGame with ${currentGame.puzzle}`);
+    // })
     .catch((err) => {
         console.log(`puzzleFetch returned an error ${err}`);
     });
 
 window.addEventListener("keypress", function(e) {
-    if (currentGame) {
-        const guess = String.fromCharCode(e.charCode);
-        console.log(`guessing ${guess}`);
-        if (currentGame.status !== "Playing") {
-            return;
-        }
-        currentGame.makeGuess(String.fromCharCode(e.charCode));
-        renderPuzzle(currentGame.puzzle);
+    const guess = String.fromCharCode(e.charCode);
+    console.log(`guessing ${guess}`);
+    if (currentGame.status !== "Playing") {
+        return;
     }
+    currentGame.makeGuess(String.fromCharCode(e.charCode));
+    renderPuzzle();
 });
 
-const renderPuzzle = (myPuzzle) => {
+const renderPuzzle = () => {
     currentGame.calculateStatus();
-    const vDom = document.getElementById("hResult");
-    const pResultDom = document.createElement("div");
-    const statusDom = document.createElement("div");
-    vDom.innerText = `You are allowed ${currentGame.guessesAllowed} guesses`;
-    pResultDom.innerText = `The puzzle result is ${myPuzzle}`;
-    statusDom.innerText = currentGame.statusMessage;
-    vDom.appendChild(pResultDom);
-    vDom.appendChild(statusDom);
+    puzzleEl.textContent = `You are allowed ${currentGame.guessesAllowed} guesses`;
+    guessesEl.textContent = `The puzzle result is ${currentGame.puzzle}`;
+    statusEl.textContent = currentGame.statusMessage;
 };
-// if (realPuzzleWord.length > 0) {
-//     console.log(`is the the real puzzle word? ${realPuzzleWord}`)
-//     renderPuzzle(currentGame.puzzle);
-// }
 
 
 
+const startGame = async() => {
+    const puzzle = await getPuzzleFetchAsync(2)
+    currentGame = new HangManGame(puzzle, 5)
+    renderPuzzle()
+}
 
-getCurrentCountry().then(
-    (country) => {
-        console.log(` Region and name: ${country.region}, ${country.name}`)
-    },
-    (error) => {
-        console.log(error);
-    }
-);
+
+document.querySelector('#reset').addEventListener('click', startGame)
+    // getCurrentCountry().then(
+    //     (country) => {
+    //         console.log(` Region and name: ${country.region}, ${country.name}`)
+    //     },
+    //     (error) => {
+    //         console.log(error);
+    //     }
+    // );
+
+
+startGame()
