@@ -40,10 +40,18 @@ window.addEventListener("keypress", function(e) {
 });
 
 const renderPuzzle = () => {
+    puzzleEl.innerHTML = ''
     currentGame.calculateStatus();
-    puzzleEl.textContent = `You are allowed ${currentGame.guessesAllowed} guesses`;
-    guessesEl.textContent = `The puzzle result is ${currentGame.puzzle}`;
-    statusEl.textContent = currentGame.statusMessage;
+    // guessesEl.textContent = `You are allowed ${currentGame.guessesAllowed} guesses`;
+    //puzzleEl.textContent = `${currentGame.puzzle}`;
+    guessesEl.textContent = currentGame.statusMessage;
+    //1. For each character in the string, add a span into #puzzle
+    //2. The spans text should be the letter itself
+    puzzleEl.innerHTML = ''
+    const puzzleArray = currentGame.puzzle.split("")
+    puzzleArray.forEach((item) => {
+        puzzleEl.innerHTML += `<span>${item}</span>`
+    })
 };
 
 
