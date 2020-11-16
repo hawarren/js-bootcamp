@@ -49,8 +49,10 @@ const renderPuzzle = () => {
     //2. The spans text should be the letter itself
     puzzleEl.innerHTML = ''
     const puzzleArray = currentGame.puzzle.split("")
-    puzzleArray.forEach((item) => {
-        puzzleEl.innerHTML += `<span>${item}</span>`
+    currentGame.puzzle.split("").forEach((item) => {
+        const letterEl = document.createElement("span")
+        letterEl.innerText = item
+        puzzleEl.appendChild(letterEl)
     })
 };
 
