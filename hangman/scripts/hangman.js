@@ -13,7 +13,7 @@ class HangManGame {
         let wordScore = "";
         console.log(`getPuzzleResult(): You have ${this.guessesAllowed} guesses left`);
         this.word.forEach((item) => {
-            if (this.guessedLetters.includes(item)) {
+            if (this.guessedLetters.includes(item) || item == " ") {
                 wordScore += item;
             } else {
                 wordScore += "*";
