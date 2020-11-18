@@ -2,15 +2,22 @@
 <!-- see mdn html documentation on MDN -->
 <html>
 
-<head> </head>
+<head>
+    <link href="styles/styles.css" rel="stylesheet">
+</head>
 
 <body>
-    <h1>
-        Notes App
-    </h1>
-    <h2>
-        Take notes and never forget
-    </h2>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">
+                Notes App
+            </h1>
+            <h2 class="header__subtitle">
+                Take notes and never forget
+            </h2>
+        </div>
+    </div>
+
     <input id="search-text" />
     <div id="notes"></div>
     <select id="sortStyle">
@@ -27,8 +34,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
     <!-- uuidv4 script library generates cryptographically strong uuids -->
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
-    <script src="notes-functions.js"></script>
-    <script src="notes-app.js"></script>
+    <script src="scripts/notes-functions.js"></script>
+    <script src="scripts/notes-app.js"></script>
 </body>
 
 </html>
