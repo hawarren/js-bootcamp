@@ -7,11 +7,22 @@
 </head>
 
 <body>
-    <p>
+    <div class="header">
+        <div class="container">
+            <h1 class="header__title">
+                Notes App
+            </h1>
+            <h2 class="header__subtitle">
+                Take notes and never forget
+            </h2>
+        </div>
+    </div>
+    <div class="actions__container actions__container--spaced">
         <a href="./index.html">Navigate home</a>
-    </p>
+        <span id="note-lastUpdated">test</span>
+    </div>
+
     <input id="note-title" placeholder="Title of note">
-    <span id="note-lastUpdated">test</span>
     <textarea id="note-body" placeholder="Enter text for your note"></textarea>
     <button id="deleteButton">Delete this note</button>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>

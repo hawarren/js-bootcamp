@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <div class="header">
+    <header class="header">
         <div class="container">
             <h1 class="header__title">
                 Notes App
@@ -16,15 +16,18 @@
                 Take notes and never forget
             </h2>
         </div>
+    </header>
+    <div class="actions">
+        <div class="actions__container">
+            <input id="search-text" class="input" />
+            <select id="sortStyle" class="dropdown">
+              <option value="alphabetSort">Sort alphabetically</option>
+              <option value="mostRecent">Sort Recent items</option>
+              <option value="CreatedFirst">Sort by Created</option>
+            </select>
+        </div>
     </div>
-
-    <input id="search-text" />
     <div id="notes"></div>
-    <select id="sortStyle">
-      <option value="alphabetSort">Sort alphabetically</option>
-      <option value="mostRecent">Sort Recent items</option>
-      <option value="CreatedFirst">Sort by Created</option>
-    </select>
     <form id="name-form">
         <input type="text" placeholder="Note Title" name="inputTitle" />
         <span></span>
