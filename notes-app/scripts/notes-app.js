@@ -24,16 +24,14 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 })
 document.querySelector('#name-form').addEventListener('submit', (e) => {
     e.preventDefault() //keeps form from being submitted to server (ie the default behavior of submit)
-    console.log(e.target.elements.inputTitle.value) //
-    console.log(e.target.elements.inputBody.value) //
         //addNotes("Unnamed Note", "")
     let newID = uuidv4()
     let now = moment().valueOf()
     console.log(`logging note with timestamp ${moment(now).format('MMM Do YYYY')}`)
     notes.push({
         id: newID, //assign a uuid so we can identify that note later
-        title: e.target.elements.inputTitle.value,
-        body: e.target.elements.inputBody.value,
+        title: '',
+        body: '',
         createdAt: now,
         updatedAt: now
     });

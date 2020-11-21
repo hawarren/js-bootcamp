@@ -1,145 +1,144 @@
-'use strict'
+"use strict";
 //errors on things like leaked global, where variable is used but not declared, thus attaching to the window object
-let data = 0
+let data = 0;
 const processData = () => {
-    data = '123454431'
-}
-processData()
-console.log(data)
+    data = "123454431";
+};
+processData();
+console.log(data);
 
-//create the following functions
-//get saved notes
 let getSavedNotes = () => {
     try {
-        let storedNotes = localStorage.getItem('storedNotes')
-        return storedNotes ? JSON.parse(storedNotes) : []
+        let storedNotes = localStorage.getItem("storedNotes");
+        return storedNotes ? JSON.parse(storedNotes) : [];
     } catch (e) {
-        return []
+        return [];
     }
-
 };
 
 let addNotes = (newTitle, newBody) => {
-    let now = moment().valueOf()
+    let now = moment().valueOf();
     notes.push({
         id: uuidv4(), //assign a uuid so we can identify that note later
         title: newTitle,
         body: newBody,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
     });
-    saveNotes(notes)
+    saveNotes(notes);
 };
 //Save notes
 let saveNotes = (notesToSave) => {
     if (!notesToSave) {
-        console.log('No notes to save')
-        return
+        console.log("No notes to save");
+        return;
     }
-    let now = moment().valueOf()
-    let notesJSON = JSON.stringify(notesToSave)
-    localStorage.setItem('storedNotes', notesJSON)
+    let now = moment().valueOf();
+    let notesJSON = JSON.stringify(notesToSave);
+    localStorage.setItem("storedNotes", notesJSON);
 };
 //render notes based on filters
 let renderNotes = (notes, filters) => {
+    const notesEl = document.querySelector("#notes")
     const filteredNotes = notes.filter((item) => {
         return (
             item.title.toLowerCase().includes(filters.searchText.toLowerCase()) ||
             item.body.toLowerCase().includes(filters.searchText.toLowerCase())
         );
     });
-    document.querySelector("#notes").innerHTML = ""; //clear the notes first
+    notesEl.innerHTML = ""; //clear the notes first
     //create elements for just the filtered notes
+    if (filteredNotes.length > 0) {
+        generateSummaryDom(filteredNotes.length);
+        generateNoteDom(filteredNotes);
+    } else {
 
-    generateSummaryDom(filteredNotes.length);
-    generateNoteDom(filteredNotes);
-
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No Notes available'
+        emptyMessage.classList.add('empty-message')
+        notesEl.appendChild(emptyMessage)
+    }
 };
 const sortNotes = (notes, sortBy) => {
-
     //sort by the last edited time
-    if (sortBy === 'mostRecent') {
+    if (sortBy === "mostRecent") {
         return notes.sort((a, b) => {
             if (a.updatedAt > b.updatedAt) {
-                return -1
+                return -1;
             }
             if (a.updatedAt < b.updatedAt) {
-                return 1
+                return 1;
             }
             if (a.updatedAt == b.updatedAt) {
-                return 0
+                return 0;
             }
-        })
+        });
     }
-    if (sortBy === 'alphabetSort') {
+    if (sortBy === "alphabetSort") {
         return notes.sort((a, b) => {
             if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                return -1
+                return -1;
             }
             if (a.title.toLowerCase() < b.title.toLowerCase()) {
-                return 1
+                return 1;
             }
             if (a.title.toLowerCase() == b.title.toLowerCase()) {
-                return 0
+                return 0;
             }
-        })
+        });
     }
-    if (sortBy === 'CreatedFirst') {
+    if (sortBy === "CreatedFirst") {
         return notes.sort((a, b) => {
-            if (a.createdAt > b.createdAt)
-                return -1
-            if (a.createdAt < b.createdAt)
-                return 1
-            if (a.createdAt == b.ctreatedAt)
-                return 0
-        })
-
+            if (a.createdAt > b.createdAt) return -1;
+            if (a.createdAt < b.createdAt) return 1;
+            if (a.createdAt == b.ctreatedAt) return 0;
+        });
     }
-}
+};
 
 //generateNoteDOM
 let generateNoteDom = (notes) => {
     //add div root, then put checkbox, note and delete button inside
     notes.forEach((note) => {
-        let rootDiv = document.createElement('div')
-            //add checkbox and x button for each div
-        let newCheckBox = document.createElement('input');
-        newCheckBox.setAttribute('type', 'checkbox')
+        let rootDiv = document.createElement("div");
+        //add checkbox and x button for each div
+        let newCheckBox = document.createElement("input");
+        newCheckBox.setAttribute("type", "checkbox");
 
-        newCheckBox.checked = true
-        newCheckBox.addEventListener('input', (e) => {
-            console.log(note)
-        })
-        let deleteButton = document.createElement('button')
-        deleteButton.innerText = 'x'
-        deleteButton.addEventListener('click', (e) => {
-            console.log(note)
-            removeNote(note)
-        })
-        let mySpan = document.createElement('a')
-        mySpan.innerText = `${note.title} \: ${note.body}`
+        newCheckBox.checked = true;
+        newCheckBox.addEventListener("input", (e) => {
+            console.log(note);
+        });
+        let deleteButton = document.createElement("button");
+        deleteButton.innerText = "x";
+        deleteButton.addEventListener("click", (e) => {
+            console.log(note);
+            removeNote(note);
+        });
+        let mySpan = document.createElement("a");
+        mySpan.innerText = `${note.title} \: ${note.body}`;
 
-        mySpan.setAttribute('href', `./edit.html#${note.id}`) // add a link to the edit page along with the note id as a the hash
-            //add all elements to my root div
-        rootDiv.appendChild(newCheckBox)
-        rootDiv.appendChild(mySpan)
-        rootDiv.appendChild(deleteButton)
+        mySpan.setAttribute("href", `./edit.html#${note.id}`); // add a link to the edit page along with the note id as a the hash
+        //add all elements to my root div
+        rootDiv.appendChild(newCheckBox);
+        rootDiv.appendChild(mySpan);
+        rootDiv.appendChild(deleteButton);
         document.querySelector("#notes").appendChild(rootDiv);
     });
 };
 //generateSummaryDom
 let generateSummaryDom = (count) => {
     const noteHead = document.createElement("h2");
-    noteHead.textContent = `You have ${count} notes`;
+    noteHead.textContent = `You have ${count} note${count > 1? 's' : ''}`;
     document.querySelector("#notes").appendChild(noteHead);
 };
 
 let removeNote = (noteToRemove) => {
-    let foundNote = notes.findIndex((element) => element.id == noteToRemove.id)
+    let foundNote = notes.findIndex((element) => element.id == noteToRemove.id);
     if (foundNote != -1) {
-        console.log(`Removing ${notes[foundNote].title}`)
-        notes.splice(foundNote, 1)
+        console.log(`Removing ${notes[foundNote].title}`);
+        notes.splice(foundNote, 1);
     }
-    saveNotes(notes)
-    renderNotes(notes, filters)
-}
+    saveNotes(notes);
+    renderNotes(notes, filters);
+};
