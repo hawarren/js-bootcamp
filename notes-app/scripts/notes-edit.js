@@ -19,6 +19,7 @@ let renderThisNote = () => {
     titleElement.value = note.title
     bodyElement.value = note.body
     lastUpdatedElement.textContent = `Last edited ${timeAgo}`
+    lastUpdatedElement.classList.add('list-item__subtitle')
 }
 renderThisNote()
 

@@ -37,6 +37,7 @@ let saveNotes = (notesToSave) => {
     let notesJSON = JSON.stringify(notesToSave);
     localStorage.setItem("storedNotes", notesJSON);
 };
+
 //render notes based on filters
 let renderNotes = (notes, filters) => {
     const notesEl = document.querySelector("#notes")
@@ -46,6 +47,7 @@ let renderNotes = (notes, filters) => {
             item.body.toLowerCase().includes(filters.searchText.toLowerCase())
         );
     });
+
     notesEl.innerHTML = ""; //clear the notes first
     //create elements for just the filtered notes
     if (filteredNotes.length > 0) {
@@ -100,32 +102,42 @@ const sortNotes = (notes, sortBy) => {
 let generateNoteDom = (notes) => {
     //add div root, then put checkbox, note and delete button inside
     notes.forEach((note) => {
-        let rootDiv = document.createElement("div");
+        let noteEl = document.createElement("a");
         //add checkbox and x button for each div
         let newCheckBox = document.createElement("input");
-        newCheckBox.setAttribute("type", "checkbox");
+        let deleteButton = document.createElement("button");
+        let textEl = document.createElement("div");
 
+        let status = document.createElement('p')
+
+        newCheckBox.setAttribute("type", "checkbox");
         newCheckBox.checked = true;
         newCheckBox.addEventListener("input", (e) => {
             console.log(note);
         });
-        let deleteButton = document.createElement("button");
+
         deleteButton.innerText = "x";
         deleteButton.addEventListener("click", (e) => {
             console.log(note);
             removeNote(note);
         });
-        let mySpan = document.createElement("a");
-        mySpan.innerText = `${note.title} \: ${note.body}`;
 
-        mySpan.setAttribute("href", `./edit.html#${note.id}`); // add a link to the edit page along with the note id as a the hash
-        //add all elements to my root div
-        rootDiv.appendChild(newCheckBox);
-        rootDiv.appendChild(mySpan);
-        rootDiv.appendChild(deleteButton);
-        document.querySelector("#notes").appendChild(rootDiv);
+        textEl.innerText = `${note.title} \: ${note.body}`;
+        textEl.classList.add('list-item__title')
+            //setup the link
+        noteEl.setAttribute("href", `./edit.html#${note.id}`); // add a link to the edit page along with the note id as a the hash
+        noteEl.classList.add('list-item') //add all elements to my root div
+
+        status.textContent = ` last edited ${generateLastEdited(note.updatedAt)}`
+        console.log(`status is ${status.textContent}`)
+            //  noteEl.appendChild(newCheckBox);
+        noteEl.appendChild(textEl);
+        noteEl.appendChild(status)
+            // noteEl.appendChild(deleteButton);
+        document.querySelector("#notes").appendChild(noteEl);
     });
 };
+
 //generateSummaryDom
 let generateSummaryDom = (count) => {
     const noteHead = document.createElement("h2");
@@ -142,3 +154,6 @@ let removeNote = (noteToRemove) => {
     saveNotes(notes);
     renderNotes(notes, filters);
 };
+let generateLastEdited = (noteTime) => {
+    return moment(noteTime).fromNow()
+}
