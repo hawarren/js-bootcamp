@@ -3,7 +3,9 @@
 <html>
 
 <head>
+    <title>Javascript Notes App</title>
     <link href="styles/styles.css" rel="stylesheet">
+    <link href="images/favicon.png" rel="icon">
 </head>
 
 <body>
@@ -27,13 +29,15 @@
             </select>
         </div>
     </div>
-    <div id="notes"></div>
-    <form id="name-form">
-        <!-- <input type="text" placeholder="Note Title" name="inputTitle" />
-        <span></span>
-        <input type="text" placeholder="Note Body" name="inputBody" /> -->
-        <button id="create-note">Create Note</button>
-    </form>
+    <div class="container">
+        <div id="notes"></div>
+        <form id="name-form">
+            <!-- <input type="text" placeholder="Note Title" name="inputTitle" />
+            <span></span>
+            <input type="text" placeholder="Note Body" name="inputBody" /> -->
+            <button id="create-note" class="button">Create Note</button>
+        </form>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment-with-locales.min.js"></script>
     <!-- uuidv4 script library generates cryptographically strong uuids -->
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>

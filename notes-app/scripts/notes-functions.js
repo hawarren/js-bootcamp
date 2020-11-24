@@ -108,7 +108,7 @@ let generateNoteDom = (notes) => {
         let deleteButton = document.createElement("button");
         let textEl = document.createElement("div");
 
-        let status = document.createElement('p')
+        let statusEl = document.createElement('p')
 
         newCheckBox.setAttribute("type", "checkbox");
         newCheckBox.checked = true;
@@ -128,11 +128,12 @@ let generateNoteDom = (notes) => {
         noteEl.setAttribute("href", `./edit.html#${note.id}`); // add a link to the edit page along with the note id as a the hash
         noteEl.classList.add('list-item') //add all elements to my root div
 
-        status.textContent = ` last edited ${generateLastEdited(note.updatedAt)}`
+        statusEl.textContent = ` last edited ${generateLastEdited(note.updatedAt)}`
+        statusEl.classList.add('list-item__subtitle')
         console.log(`status is ${status.textContent}`)
             //  noteEl.appendChild(newCheckBox);
         noteEl.appendChild(textEl);
-        noteEl.appendChild(status)
+        noteEl.appendChild(statusEl)
             // noteEl.appendChild(deleteButton);
         document.querySelector("#notes").appendChild(noteEl);
     });
