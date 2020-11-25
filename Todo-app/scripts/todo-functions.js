@@ -12,7 +12,7 @@ let getSavedTodos = () => {
 
 //Save todos to local storage
 const saveTodos = () => {
-    todosJson = JSON.stringify(todos);
+    let todosJson = JSON.stringify(todos);
     localStorage.setItem("todos", todosJson);
 };
 const toggleTodo = (id) => {
