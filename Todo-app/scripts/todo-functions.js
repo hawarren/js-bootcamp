@@ -48,28 +48,36 @@ let generateTodoDOM = (filteredList) => {
         generateSummaryDOM(filteredList.length);
         filteredList.forEach((item) => {
             //Setup the pieces to create a single line checkbox with the text title
-            const rootDiv = document.createElement("div"); //element to hold our todo with checkbox in it on one line
-            const mySpan = document.createElement("span");
-            mySpan.textContent = item.title;
-
+            const todoEl = document.createElement("label");
+            const containerEl = document.createElement('div')
             const thisCheckBox = document.createElement("input");
-            thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
+            const todoTextEl = document.createElement("span");
             const removeButtonEl = document.createElement("button");
-            removeButtonEl.textContent = "x";
-
+                        
+            todoTextEl.textContent = item.title;
+            removeButtonEl.textContent = "remove";
+            removeButtonEl.classList.add('button', 'button--text')
+            
+            thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
             thisCheckBox.checked = item.isDone
             thisCheckBox.id = item.uuid
             thisCheckBox.addEventListener('change', (e) => {
-
                     toggleTodo(item.uuid)
                     saveTodos()
                 })
-                //add our stuff to the rootdiv and then append it to the DOM
-            rootDiv.appendChild(thisCheckBox);
-            rootDiv.appendChild(mySpan);
-            rootDiv.appendChild(removeButtonEl);
+                //add our stuff to the parent element and then append it to the DOM
+            containerEl.appendChild(thisCheckBox);
+            containerEl.appendChild(todoTextEl);
+            todoEl.appendChild(containerEl)
+            todoEl.appendChild(removeButtonEl);
 
-            document.querySelector("#myTodos").appendChild(rootDiv);
+            //setup container
+            todoEl.classList.add('list-item')
+            containerEl.classList.add('list-item__container')
+
+
+
+            document.querySelector("#myTodos").appendChild(todoEl);
         });
     }
 };
