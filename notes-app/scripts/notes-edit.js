@@ -38,7 +38,7 @@ document.getElementById('note-body').addEventListener('change', (e) => {
 removeElement.addEventListener('click', (e) => {
         //find the index of the note so we we delete it
         noteIndex = notes.findIndex((item) => note === item)
-        notes.splice(noteIndex)
+        notes.splice(noteIndex, 1)
         saveNotes(notes) //save our newly updated set of notes
         location.assign('./index.html') //route back to home page
     })

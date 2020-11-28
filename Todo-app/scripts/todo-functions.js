@@ -9,6 +9,7 @@ let getSavedTodos = () => {
     }
 }
 
+let todoDomEL = document.querySelector("#myTodos")
 
 //Save todos to local storage
 const saveTodos = () => {
@@ -18,13 +19,14 @@ const saveTodos = () => {
 const toggleTodo = (id) => {
     //finds reference to my todo object within the array    
     const todo = todos.find((todo) => todo.uuid === id)
-        //update the todo item via the reference we just grabbed
+    //update the todo item via the reference we just grabbed
     todo.isDone = todo !== undefined ? !todo.isDone : !todo.isDone
 }
 
 //Render application todos based on filters
 let renderTodos = (todos, textFilter) => {
-    document.querySelector("#myTodos").textContent = "";
+ 
+    todoDomEL.textContent = "";
     let filteredItems = todos.filter((item) => item.title.toLowerCase().includes(textFilters.searchText));
 
     if (textFilters.hideCompleted) {
@@ -32,7 +34,9 @@ let renderTodos = (todos, textFilter) => {
         filteredItems = filteredItems.filter((item) => !item.isDone);
 
     }
+
     generateTodoDOM(filteredItems);
+
 };
 
 //1. Set up a root div
@@ -45,46 +49,64 @@ let generateTodoDOM = (filteredList) => {
     if (!filteredList) {
         console.log("generateTodoDOM: No filteredlist to print");
     } else {
-        generateSummaryDOM(filteredList.length);
-        filteredList.forEach((item) => {
-            //Setup the pieces to create a single line checkbox with the text title
-            const todoEl = document.createElement("label");
-            const containerEl = document.createElement('div')
-            const thisCheckBox = document.createElement("input");
-            const todoTextEl = document.createElement("span");
-            const removeButtonEl = document.createElement("button");
-                        
-            todoTextEl.textContent = item.title;
-            removeButtonEl.textContent = "remove";
-            removeButtonEl.classList.add('button', 'button--text')
-            
-            thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
-            thisCheckBox.checked = item.isDone
-            thisCheckBox.id = item.uuid
-            thisCheckBox.addEventListener('change', (e) => {
+        if (filteredList == 0) {
+            const emptyEl = document.createElement('p')
+            emptyEl.classList.add('empty-message')
+            emptyEl.textContent = 'No messages to show'
+            todoDomEL.appendChild(emptyEl)
+        }
+        else {
+            generateSummaryDOM(filteredList.length);
+            filteredList.forEach((item) => {
+                //Setup the pieces to create a single line checkbox with the text title
+                const todoEl = document.createElement("label");
+                const containerEl = document.createElement('div')
+                const thisCheckBox = document.createElement("input");
+                const todoTextEl = document.createElement("span");
+                const removeButtonEl = document.createElement("button");
+
+                todoTextEl.textContent = item.title;
+                removeButtonEl.textContent = "remove";
+                removeButtonEl.classList.add('button', 'button--text')
+                removeButtonEl.addEventListener('click', (e) => {
+                    let indexToRemove = todos.findIndex((todo) => {
+                        return item.uuid == todo.uuid
+                    })
+                    todos.splice(indexToRemove, 1)
+                    saveTodos();
+                    renderTodos(todos, textFilters)
+
+                })
+
+                thisCheckBox.setAttribute('type', 'checkbox'); //create a checkbox and set it's type            
+                thisCheckBox.checked = item.isDone
+                thisCheckBox.id = item.uuid
+                thisCheckBox.addEventListener('change', (e) => {
                     toggleTodo(item.uuid)
                     saveTodos()
                 })
                 //add our stuff to the parent element and then append it to the DOM
-            containerEl.appendChild(thisCheckBox);
-            containerEl.appendChild(todoTextEl);
-            todoEl.appendChild(containerEl)
-            todoEl.appendChild(removeButtonEl);
+                containerEl.appendChild(thisCheckBox);
+                containerEl.appendChild(todoTextEl);
+                todoEl.appendChild(containerEl)
+                todoEl.appendChild(removeButtonEl);
 
-            //setup container
-            todoEl.classList.add('list-item')
-            containerEl.classList.add('list-item__container')
+                //setup container
+                todoEl.classList.add('list-item')
+                containerEl.classList.add('list-item__container')
 
-
-
-            document.querySelector("#myTodos").appendChild(todoEl);
-        });
+                todoDomEL.appendChild(todoEl);
+            });
+        }
     }
 };
 
 //Get the Dom elements for the list summary
 let generateSummaryDOM = (count) => {
     let summaryEl = document.createElement("h2");
-    summaryEl.textContent = `You have ${count} items left to do`;
-    document.querySelector("#myTodos").appendChild(summaryEl);
+    const plural = count == 1 ? '' : 's'
+    summaryEl.textContent = `You have ${count} item${plural} left to do`;
+    summaryEl.classList.add('list-title')
+    todoDomEL.appendChild(summaryEl);
 };
+
