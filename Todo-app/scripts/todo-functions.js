@@ -52,7 +52,7 @@ let generateTodoDOM = (filteredList) => {
         if (filteredList == 0) {
             const emptyEl = document.createElement('p')
             emptyEl.classList.add('empty-message')
-            emptyEl.textContent = 'No messages to show'
+            emptyEl.textContent = 'No todo messages to show'
             todoDomEL.appendChild(emptyEl)
         }
         else {

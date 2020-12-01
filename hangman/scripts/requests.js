@@ -13,12 +13,12 @@ const getPuzzle = (wordCount) => new Promise((resolve, reject) => {
         }
     })
 
-    request.open('GET', `http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    request.open('GET', `//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
     request.send()
 })
 
 const getPuzzleFetch = (wordCount) => {
-    return fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    return fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
         .then((response) => {
             if (response.status === 200) {
                 return response.json()
@@ -29,7 +29,7 @@ const getPuzzleFetch = (wordCount) => {
 }
 
 const getPuzzleFetchAsync = async(wordCount) => {
-    const response = await fetch(`http://puzzle.mead.io/puzzle?wordCount=${wordCount}`)
+    const response = await fetch(`//puzzle.mead.io/puzzle?wordCount=${wordCount}`)
     if (response.status === 200) {
         const data = await response.json()
         return data.puzzle
@@ -42,7 +42,7 @@ const getPuzzleFetchAsync = async(wordCount) => {
 //change get location to use async/await.
 const getCountry = (countryCode) => new Promise((resolve, reject) => {
     const countryRequest = new XMLHttpRequest()
-    countryRequest.open('GET', 'https://restcountries.eu/rest/v2/all')
+    countryRequest.open('GET', '//restcountries.eu/rest/v2/all')
     countryRequest.send()
     countryRequest.addEventListener('readystatechange', (e) => {
         if (e.target.readyState === 4 && e.target.status === 200) {
@@ -61,7 +61,7 @@ const getCountry = (countryCode) => new Promise((resolve, reject) => {
     })
 })
 const getCountryFetch = async(countryCode) => {
-    let mydata = await fetch('https://restcountries.eu/rest/v2/all')
+    let mydata = await fetch('//restcountries.eu/rest/v2/all')
     if (mydata.status === 200) {
         mydata = await mydata.json()
     } else {
