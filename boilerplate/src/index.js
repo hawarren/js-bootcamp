@@ -1,6 +1,6 @@
 
-import { add, name } from './utilities'
-import { scream } from './scream.js'
+import otherSquare, { add, name } from './utilities'
+import  otherScream  from './scream.js'
 console.log('index.js')
 console.log(add(23, 1))
 console.log(name)
@@ -11,4 +11,5 @@ console.log(name)
 // b. Add "!" onto the end
 //3. Import scream into index.js and use it
 
-console.log(scream('This imported function works'))
+console.log(otherScream('This imported function using export default works'))
+console.log(otherSquare(10))
