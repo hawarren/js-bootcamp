@@ -2,7 +2,7 @@
 import otherSquare, { add, name } from './utilities'
 import  otherScream  from './scream.js'
 console.log('index.js')
-console.log(add(23, 1))
+console.log(add(32, 11))
 console.log(name)
 
 //1. Create new file called scream.js

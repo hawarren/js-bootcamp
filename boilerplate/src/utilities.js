@@ -3,7 +3,7 @@ console.log('utilities.js')
 //named export
  const add = (a,b) => a + b
 console.log(add(2,3))
- const name  = 'Hanif'
+ const name  = 'HWarren'
 
 //default export, only 1 possible at a time
 
