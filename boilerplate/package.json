@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "input.js",
-  "scripts": {
-    "serve": "live-server public",
-    "build": "webpack --watch",
-    "dev-server": "webpack-dev-server"
+  "scripts": {        
+    "dev-server": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",

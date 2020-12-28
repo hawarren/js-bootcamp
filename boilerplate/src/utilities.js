@@ -10,3 +10,5 @@ console.log(add(2,3))
 const square = (x) => x*x*x
 
 export {add, name, square as default}
+
+console.log('from my code')
