@@ -8,7 +8,7 @@ module.exports = {
     },
     module: {
         rules: [{
-            test:/\.js$/,
+            test: /\.js$/,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader',
@@ -21,7 +21,8 @@ module.exports = {
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
         publicPath: '/scripts/'
-    }
+    },
+    devtool: 'source-map'
 }
 
 
