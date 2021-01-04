@@ -1,3 +1,5 @@
+import HangmanGame from './hangman.js'
+import getPuzzle from './requests.js'
 const puzzleEl = document.getElementById("puzzleEl");
 const guessesEl = document.getElementById("guesses");
 const statusEl = document.getElementById("status")

@@ -91,3 +91,5 @@ const getCurrentCountry = async() => {
     return getCountryFetch(myLoc.country)
 
 }
+
+export {getPuzzle as default}
