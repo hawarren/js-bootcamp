@@ -129,4 +129,4 @@ HangManGame.prototype.resetGame = function(word, guessesAllowed) {
 
 }
 
-export { HangManGame as default}
+export  { HangManGame as default }

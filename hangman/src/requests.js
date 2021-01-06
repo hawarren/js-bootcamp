@@ -92,4 +92,4 @@ const getCurrentCountry = async() => {
 
 }
 
-export {getPuzzle as default}
+export {getPuzzleFetchAsync as default}
