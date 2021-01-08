@@ -1,8 +1,14 @@
+import uuidv4 from 'uuid/v4'
+import isEmail from 'validator/lib/isEmail'
 import HangManGame from './hangman.js'
 import getPuzzleFetchAsync from './requests.js'
 const puzzleEl = document.getElementById("puzzleEl");
 const guessesEl = document.getElementById("guesses");
 const statusEl = document.getElementById("status")
+
+console.log(uuidv4())
+let testEmail = 'test@Hanif.com'
+console.log(`Is this an email ${testEmail}: ${isEmail(testEmail)} `)
 
 let realPuzzleWord = "";
 
