@@ -25,16 +25,7 @@ document.querySelector('#search-text').addEventListener('input', (e) => {
 document.querySelector('#name-form').addEventListener('submit', (e) => {
     e.preventDefault() //keeps form from being submitted to server (ie the default behavior of submit)
         //addNotes("Unnamed Note", "")
-    let newID = uuidv4()
-    let now = moment().valueOf()
-    console.log(`logging note with timestamp ${moment(now).format('MMM Do YYYY')}`)
-    notes.push({
-        id: newID, //assign a uuid so we can identify that note later
-        title: '',
-        body: '',
-        createdAt: now,
-        updatedAt: now
-    });
+   
     //save the note and redirect to edit page for that note
     saveNotes(notes);
     location.assign(`./edit.html#${newID}`)
