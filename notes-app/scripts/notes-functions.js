@@ -7,14 +7,7 @@ const processData = () => {
 processData();
 console.log(data);
 
-let getSavedNotes = () => {
-    try {
-        let storedNotes = localStorage.getItem("storedNotes");
-        return storedNotes ? JSON.parse(storedNotes) : [];
-    } catch (e) {
-        return [];
-    }
-};
+
 
 let addNotes = (newTitle, newBody) => {
     let now = moment().valueOf();
@@ -27,16 +20,7 @@ let addNotes = (newTitle, newBody) => {
     });
     saveNotes(notes);
 };
-//Save notes
-let saveNotes = (notesToSave) => {
-    if (!notesToSave) {
-        console.log("No notes to save");
-        return;
-    }
-    let now = moment().valueOf();
-    let notesJSON = JSON.stringify(notesToSave);
-    localStorage.setItem("storedNotes", notesJSON);
-};
+
 
 //render notes based on filters
 let renderNotes = (notes, filters) => {
@@ -146,15 +130,6 @@ let generateSummaryDom = (count) => {
     document.querySelector("#notes").appendChild(noteHead);
 };
 
-let removeNote = (noteToRemove) => {
-    let foundNote = notes.findIndex((element) => element.id == noteToRemove.id);
-    if (foundNote != -1) {
-        console.log(`Removing ${notes[foundNote].title}`);
-        notes.splice(foundNote, 1);
-    }
-    saveNotes(notes);
-    renderNotes(notes, filters);
-};
 let generateLastEdited = (noteTime) => {
     return moment(noteTime).fromNow()
 }
