@@ -1,18 +1,66 @@
 import {getNotes, createNote, removeNote, updateNote } from './notes.js'
 import {getFilters, setFilters} from './filters.js'
-// console.log('index.js')
-// // console.log(getNotes())
-// // createNote()
-// removeNote("30586ce3-6cd6-4cac-ac73-3b71e50fc451")
-// updateNote("bc8fad9a-f993-4994-880c-04645cc2274b", {title: "Test update"})
-// updateNote("df3e3c42-2842-4964-9cfa-544ee5d568c8", {title: "no title", body: "Test body update"})
-// console.log(getNotes())
 
 
-console.log(getFilters())
-setFilters({
-    searchText: 'Office',
-    sortBy: 'byCreated'
+renderNotes()
+
+document.querySelector('#create-note').addEventListener('submit', (event) => {
+    
+    
+    addNotes(event.target.elements.inputTitle, event.target.elements.inputBody)
+
+    event.target.textContent = 'Note Added'
+})
+
+document.querySelector('#search-text').addEventListener('input', (e) => {
+    console.log(e.target.value)
+    filters.searchText = e.target.value
+    renderNotes()
+})
+document.querySelector('#name-form').addEventListener('submit', (e) => {
+    e.preventDefault() //keeps form from being submitted to server (ie the default behavior of submit)
+        //addNotes("Unnamed Note", "")
+    // let newID = uuidv4()
+    // let now = moment().valueOf()
+    // console.log(`logging note with timestamp ${moment(now).format('MMM Do YYYY')}`)
+    // notes.push({
+    //     id: newID, //assign a uuid so we can identify that note later
+    //     title: '',
+    //     body: '',
+    //     createdAt: now,
+    //     updatedAt: now
+    // });
+    // //save the note and redirect to edit page for that note
+    // saveNotes(notes);
+    let newID = createNote()
+    location.assign(`./edit.html#${newID}`)
+})
+
+document.querySelector('#sortStyle').addEventListener('change', (e) => {
+    console.log(e.target.value) //print the selected item in dropdown
+    filters.sortBy = e.target.value
+        //resort the list in place
+    notes = sortNotes(notes, filters.sortBy)
+        //render the list, sorted this time
+    renderNotes()
 
 })
-console.log(getFilters())
+window.addEventListener('storage', (e) => {
+    this.window.console.log('Values changed')
+    debugger
+    if (e.key === 'storedNotes') {
+        notes = getSavedNotes();
+        renderNotes()
+    }
+})
+const now = moment() //create timestamp
+console.log(now.toString())
+now.add(1, 'year').subtract(20, 'days')
+now.minute(1)
+
+//November 3rd, 2003
+console.log(now.format("MMMM Do YYYY"))
+console.log(now.fromNow()) //log timestamp to console
+console.log(now.valueOf())
+const nowTimeStamp = now.valueOf()
+console.log(moment(now.valueOf()))

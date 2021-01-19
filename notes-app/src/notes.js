@@ -37,6 +37,7 @@ const createNote = () => {
         updatedAt: now
     });
     saveNotes()
+    return newID
 }
 
 

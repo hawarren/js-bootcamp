@@ -1,6 +1,11 @@
+import moment from 'moment'
+import {getFilters} from './filters'
+import {sortNotes} from './notes.js'
 //render notes based on filters
-let renderNotes = (notes, filters) => {
+let renderNotes = () => {
     const notesEl = document.querySelector("#notes")
+    const filters = getFilters()
+    const notes = sortNotes(filters.sortBy)
     const filteredNotes = notes.filter((item) => {
         return (
             item.title.toLowerCase().includes(filters.searchText.toLowerCase()) ||
