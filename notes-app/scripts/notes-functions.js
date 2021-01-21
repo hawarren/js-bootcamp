@@ -45,6 +45,7 @@ let renderNotes = (notes, filters) => {
         notesEl.appendChild(emptyMessage)
     }
 };
+/*
 const sortNotes = (notes, sortBy) => {
     //sort by the last edited time
     if (sortBy === "mostRecent") {
@@ -81,6 +82,7 @@ const sortNotes = (notes, sortBy) => {
         });
     }
 };
+*/
 
 //generateNoteDOM
 let generateNoteDom = (notes) => {

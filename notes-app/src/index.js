@@ -1,5 +1,6 @@
 import {getNotes, createNote, removeNote, updateNote } from './notes.js'
 import {getFilters, setFilters} from './filters.js'
+import {renderNotes} from './view.js'
 
 
 renderNotes()
@@ -14,7 +15,11 @@ document.querySelector('#create-note').addEventListener('submit', (event) => {
 
 document.querySelector('#search-text').addEventListener('input', (e) => {
     console.log(e.target.value)
-    filters.searchText = e.target.value
+    setFilters({
+        searchText: e.target.value
+    })
+    
+
     renderNotes()
 })
 document.querySelector('#name-form').addEventListener('submit', (e) => {
@@ -38,9 +43,10 @@ document.querySelector('#name-form').addEventListener('submit', (e) => {
 
 document.querySelector('#sortStyle').addEventListener('change', (e) => {
     console.log(e.target.value) //print the selected item in dropdown
-    filters.sortBy = e.target.value
+    setFilters({sortBy: e.target.value})
+    
         //resort the list in place
-    notes = sortNotes(notes, filters.sortBy)
+    notes = sortNotes(getFilters.sortBy)
         //render the list, sorted this time
     renderNotes()
 
@@ -49,7 +55,7 @@ window.addEventListener('storage', (e) => {
     this.window.console.log('Values changed')
     debugger
     if (e.key === 'storedNotes') {
-        notes = getSavedNotes();
+        
         renderNotes()
     }
 })
