@@ -80,7 +80,7 @@ const sortNotes = (sortBy) => {
             }
         });
     }
-    if (sortBy === "CreatedFirst") {
+    if (sortBy === "ByEdited") {
         return notes.sort((a, b) => {
             if (a.createdAt > b.createdAt) return -1;
             if (a.createdAt < b.createdAt) return 1;

@@ -1,6 +1,6 @@
 import moment from 'moment'
 import {getFilters} from './filters'
-import {sortNotes} from './notes.js'
+import {getNotes, sortNotes} from './notes.js'
 //render notes based on filters
 let renderNotes = () => {
     const notesEl = document.querySelector("#notes")
@@ -29,42 +29,42 @@ let renderNotes = () => {
 
 
 
-const sortNotes = (notes, sortBy) => {
-    //sort by the last edited time
-    if (sortBy === "mostRecent") {
-        return notes.sort((a, b) => {
-            if (a.updatedAt > b.updatedAt) {
-                return -1;
-            }
-            if (a.updatedAt < b.updatedAt) {
-                return 1;
-            }
-            if (a.updatedAt == b.updatedAt) {
-                return 0;
-            }
-        });
-    }
-    if (sortBy === "alphabetSort") {
-        return notes.sort((a, b) => {
-            if (a.title.toLowerCase() > b.title.toLowerCase()) {
-                return -1;
-            }
-            if (a.title.toLowerCase() < b.title.toLowerCase()) {
-                return 1;
-            }
-            if (a.title.toLowerCase() == b.title.toLowerCase()) {
-                return 0;
-            }
-        });
-    }
-    if (sortBy === "CreatedFirst") {
-        return notes.sort((a, b) => {
-            if (a.createdAt > b.createdAt) return -1;
-            if (a.createdAt < b.createdAt) return 1;
-            if (a.createdAt == b.ctreatedAt) return 0;
-        });
-    }
-};
+// const sortNotes = (notes, sortBy) => {
+//     //sort by the last edited time
+//     if (sortBy === "mostRecent") {
+//         return notes.sort((a, b) => {
+//             if (a.updatedAt > b.updatedAt) {
+//                 return -1;
+//             }
+//             if (a.updatedAt < b.updatedAt) {
+//                 return 1;
+//             }
+//             if (a.updatedAt == b.updatedAt) {
+//                 return 0;
+//             }
+//         });
+//     }
+//     if (sortBy === "alphabetSort") {
+//         return notes.sort((a, b) => {
+//             if (a.title.toLowerCase() > b.title.toLowerCase()) {
+//                 return -1;
+//             }
+//             if (a.title.toLowerCase() < b.title.toLowerCase()) {
+//                 return 1;
+//             }
+//             if (a.title.toLowerCase() == b.title.toLowerCase()) {
+//                 return 0;
+//             }
+//         });
+//     }
+//     if (sortBy === "CreatedFirst") {
+//         return notes.sort((a, b) => {
+//             if (a.createdAt > b.createdAt) return -1;
+//             if (a.createdAt < b.createdAt) return 1;
+//             if (a.createdAt == b.ctreatedAt) return 0;
+//         });
+//     }
+// };
 
 
 //generateNoteDOM
