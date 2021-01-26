@@ -1,6 +1,7 @@
 import {getNotes, createNote, removeNote, updateNote } from './notes.js'
 import {getFilters, setFilters} from './filters.js'
 import {renderNotes} from './view.js'
+import moment from 'moment'
 
 
 renderNotes()

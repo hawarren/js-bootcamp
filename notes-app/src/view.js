@@ -6,7 +6,7 @@ let renderNotes = () => {
     const notesEl = document.querySelector("#notes")
     const filters = getFilters()
     const notes = sortNotes(filters.sortBy)
-    const filteredNotes = notes.filter((item) => {
+    const filteredNotes = getNotes().filter((item) => {
         return (
             item.title.toLowerCase().includes(filters.searchText.toLowerCase()) ||
             item.body.toLowerCase().includes(filters.searchText.toLowerCase())
