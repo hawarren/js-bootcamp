@@ -1,6 +1,6 @@
 import moment from 'moment'
-import {getFilters} from './filters'
-import {getNotes, sortNotes} from './notes.js'
+import { getFilters } from './filters'
+import { getNotes, sortNotes } from './notes.js'
 //render notes based on filters
 let renderNotes = () => {
     const notesEl = document.querySelector("#notes")
@@ -93,17 +93,17 @@ let generateNoteDom = (notes) => {
 
         textEl.innerText = `${note.title} \: ${note.body}`;
         textEl.classList.add('list-item__title')
-            //setup the link
+        //setup the link
         noteEl.setAttribute("href", `./edit.html#${note.id}`); // add a link to the edit page along with the note id as a the hash
         noteEl.classList.add('list-item') //add all elements to my root div
 
         statusEl.textContent = ` last edited ${generateLastEdited(note.updatedAt)}`
         statusEl.classList.add('list-item__subtitle')
         console.log(`status is ${status.textContent}`)
-            //  noteEl.appendChild(newCheckBox);
+        //  noteEl.appendChild(newCheckBox);
         noteEl.appendChild(textEl);
         noteEl.appendChild(statusEl)
-            // noteEl.appendChild(deleteButton);
+        // noteEl.appendChild(deleteButton);
         document.querySelector("#notes").appendChild(noteEl);
     });
 };
@@ -111,7 +111,7 @@ let generateNoteDom = (notes) => {
 //generateSummaryDom
 let generateSummaryDom = (count) => {
     const noteHead = document.createElement("h2");
-    noteHead.textContent = `You have ${count} note${count > 1? 's' : ''}`;
+    noteHead.textContent = `You have ${count} note${count > 1 ? 's' : ''}`;
     document.querySelector("#notes").appendChild(noteHead);
 };
 
@@ -128,4 +128,25 @@ let generateLastEdited = (noteTime) => {
     return moment(noteTime).fromNow()
 }
 
-export {generateNoteDom, renderNotes, generateLastEdited}
+const initializeEditPage = (noteId) => {
+    const titleElement = document.querySelector('#note-title')
+    const bodyElement = document.querySelector('#note-body')
+    const lastUpdatedElement = document.querySelector('#note-lastUpdated')
+
+    const notes = getNotes()
+    const note = notes.find((item) => noteId === item.id)
+
+    //kick back to index  if note is not found
+    if (!note) {
+        location.assign('./index.html')
+    }
+
+    let timeAgo = moment(note.updatedAt).fromNow()
+    //populates the fields with our note data
+    titleElement.value = note.title
+    bodyElement.value = note.body
+    lastUpdatedElement.textContent = `Last edited ${timeAgo}`
+    lastUpdatedElement.classList.add('list-item__subtitle')
+}
+
+export { generateNoteDom, renderNotes, generateLastEdited, initializeEditPage }
