@@ -1,13 +1,13 @@
-import {todos} from './todos'
-import {textFilters} from './filters'
+import { textFilters } from './filters';
+import { todos } from './todos';
 
 
-let todoDomEL = document.querySelector("#myTodos")
+const todoDomEL = document.querySelector("#myTodos")
 // renderTodos
 // Arguments: none
 // Return value: none
 
-let renderTodos = (todos, textFilters) => {
+const renderTodos = () => {
  
     todoDomEL.textContent = "";
     let filteredItems = todos.filter((item) => item.title.toLowerCase().includes(textFilters.searchText));
@@ -23,7 +23,7 @@ let renderTodos = (todos, textFilters) => {
 // Arguments: todo
 // Return value: the todo element
 //Get the DOM elements for an individual note
-let generateTodoDOM = (filteredList) => {
+const generateTodoDOM = (filteredList) => {
     if (!filteredList) {
         console.log("generateTodoDOM: No filteredlist to print");
     } else {
@@ -83,7 +83,7 @@ let generateTodoDOM = (filteredList) => {
 // generateSummaryDOM
 // Arguments: incompletedTodos
 // Return value: the summary element
-let generateSummaryDOM = (count) => {
+const generateSummaryDOM = (count) => {
     let summaryEl = document.createElement("h2");
     const plural = count == 1 ? '' : 's'
     summaryEl.textContent = `You have ${count} item${plural} left to do`;
@@ -91,3 +91,4 @@ let generateSummaryDOM = (count) => {
     todoDomEL.appendChild(summaryEl);
 };
 // Make sure to set up the exports
+export { todoDomEL, renderTodos, generateTodoDOM, generateSummaryDOM}
