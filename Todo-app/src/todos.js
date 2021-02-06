@@ -2,7 +2,7 @@ import uuidv4 from 'uuid/v4'
 
 
 // Setup the empty todos array
-const todos = []
+let todos = []
 // loadTodos
 // Arguments: none
 // Return value: none

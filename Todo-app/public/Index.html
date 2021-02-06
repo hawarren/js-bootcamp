@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Boilerplate App</title>
+        <title>Javascript Todo App</title>
+        <link href="./styles/styles.css" rel="stylesheet" />
+        <link href="./images/favicon.png?v=1" rel="icon" />
     </head>
     <body>
-        Boilerplate
+        <div class="header">
+            <div class="container">
+                <h1 class="header__title">Javascript Todo App</h1>
+                <h2 class="header__subtitle">What Do You Need to do?</h2>
+            </div>
+            <div class="actions">
+                <div class="actions__container">
+                    <input id="searchText" placeholder="Filter todos here" class="input" />
+                    <label class="checkbox">
+                    <input type="checkbox" id="completedToggle" /> Hide Completed
+                  </label>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div id="myTodos"></div>
+            <form id="todo-form">
+                <input type="text" class="input" placeholder="Enter a Todo item" name="todoText" />
+                <button class="button">Add Todo</button>
+            </form>
+        </div>
         <script src="./scripts/bundle.js"></script>
     </body>
 </html>

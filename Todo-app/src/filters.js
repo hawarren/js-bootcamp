@@ -1,6 +1,6 @@
 // Set up filters default object
 const textFilters = {
-    searchtext: '',
+    searchText: '',
     hideCompleted: false
 }
 
