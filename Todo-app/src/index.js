@@ -15,7 +15,7 @@ import { renderNotes } from '../../notes-app/src/view'
 renderTodos()
 // Set up search text handler
 document.querySelector('#searchText').addEventListener('input', (event) => {
-    textFilters.searchtext = event.target.value
+    textFilters.searchText = event.target.value
     renderTodos()
 })
 // Set up checkbox handler
@@ -38,8 +38,10 @@ document.querySelector('#todo-form').addEventListener('submit', (e) => {
 })
 // Bonus: Add a watcher for local storage
 window.addEventListener('storage', (e) => {
-    this.window.console.log('Values have changed')
-    if (e.key === 'storedNotes'){
-        renderNotes()
+    window.console.log('Values have changed')
+    if (e.key === 'todos'){
+        loadTodos()
+        renderTodos()
+
     }
 })

@@ -32,9 +32,9 @@ const getTodos = () => todos
 // createTodo
 // Arguments: todo text
 // Return value: none
-const createTodo = (todoText) => {
+const createTodo = (title) => {
     if (todoText.length > 0)
-        todos.push({ uuid: uuidv4(), title: todoText, isDone: false }); //add a uuid to our title 
+        todos.push({ uuid: uuidv4(), title, isDone: false }); //add a uuid to our title 
 }
 
 // removeTodo
@@ -42,7 +42,7 @@ const createTodo = (todoText) => {
 // Return value: none
 const removeTodo = (id) => {
     let indexToRemove = todos.findIndex((todo) => {
-        return item.uuid == todo.uuid
+        return todo.uuid === id
     })
     todos.splice(indexToRemove, 1)
     saveTodos()
@@ -51,10 +51,11 @@ const removeTodo = (id) => {
 // toggleTodo
 // Arguments: id of todo to toggle
 // Return value: none
-const toggleTodo = (id) => {
+const toggleTodo = (uuid) => {
     
-    const todo = todos.find((id) =>  todo.uuid === id)
+    const todo = todos.find((todo) =>  todo.uuid === uuid)
     todo.isDone = todo !== undefined ? !todo.isDone : !todo.isDone
+    saveTodos()
     
 }
 // Make sure to call loadTodos and setup the exports

@@ -1,5 +1,5 @@
 import { textFilters } from './filters';
-import { todos } from './todos';
+import { todos, saveTodos, toggleTodo, removeTodo } from './todos';
 
 
 const todoDomEL = document.querySelector("#myTodos")
@@ -50,9 +50,9 @@ const generateTodoDOM = (filteredList) => {
                     let indexToRemove = todos.findIndex((todo) => {
                         return item.uuid == todo.uuid
                     })
-                    todos.splice(indexToRemove, 1)
-                    saveTodos();
-                    renderTodos(todos, textFilters)
+                    
+                    removeTodo(todos[indexToRemove].uuid)
+                    renderTodos()
 
                 })
 
@@ -60,8 +60,7 @@ const generateTodoDOM = (filteredList) => {
                 thisCheckBox.checked = item.isDone
                 thisCheckBox.id = item.uuid
                 thisCheckBox.addEventListener('change', (e) => {
-                    toggleTodo(item.uuid)
-                    saveTodos()
+                    toggleTodo(item.uuid)                    
                 })
                 //add our stuff to the parent element and then append it to the DOM
                 containerEl.appendChild(thisCheckBox);
