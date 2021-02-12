@@ -1,23 +1,3 @@
-const calculateAverage = (thing, ...numbers) => {
-    //    return (numOne + numTwo) /2
-    let sum = 0
-    numbers.forEach((num) => {
-        sum = +num
-    })
-    const average = sum / numbers.length
-    return `The average ${thing} is ${average}`
-
-
-}
-
-console.log(calculateAverage('grade', 0, 100, 200, 300))
-
-//Create printTeam that takes team name, coach, and players
-
-//print
-//Team: Liberty
-//Coach: Casey Penn
-//Players: Hanif, Hashim, Derrick, Darique, and Keya
 
 const printTeam = (team, coach, ...players) => {
     const teamString = `Team: ${team}`
@@ -33,5 +13,28 @@ const printTeam = (team, coach, ...players) => {
     console.log(fullString)
 
 }
+const printTeamSpread = (team, coach, firstPlayer, secondPlayer) => {
+    const teamString = `Team: ${team}`
+    const coachString = `Coach: ${coach}`
+    let playerString = 'Players:'
+
+    // playerString += players.join(', ')
+    let fullString = `${teamString} \r\n${coachString} \r\n${playerString}`
+    console.log(firstPlayer, secondPlayer)
+
+}
+const team = {
+    name: 'Liberty',
+    Coach: 'Casey Penn', 
+    Players: ['Hanif', 'Hashim', 'Derrick', 'Darique', 'Keya']
+}
 
 printTeam('Liberty', 'Casey Penn', 'Hanif', 'Hashim', 'Derrick', 'Darique', 'Keya')
+printTeamSpread(team.name, team.Coach, ...team.Players) //spread syntax
+
+let cities = ['Barcelona', 'Cape Town', 'Bordeaux']
+cities = ['Los Vegas',...cities]
+//citiesCopy.push('Los Angeles')
+
+console.log(`First array is ${cities}`)
+//console.log(`Second array is ${citiesCopy}`)

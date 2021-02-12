@@ -43,7 +43,8 @@ class HangManGame {
         console.log(`Calculating whether ${letter} is part of the real word \r\n`);
         //store it only if it's a new unique guess
         if (!this.guessedLetters.includes(letter)) {
-            this.guessedLetters.push(letter);
+            //this.guessedLetters.push(letter);
+            this.guessedLetters = [letter, ...this.guessedLetters]
         }
         if (!this.word.includes(letter)) {
             this.guessesAllowed--;
