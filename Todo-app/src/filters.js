@@ -12,12 +12,12 @@ const getFilters = () => textFilters
 // setFilters
 // Arguments: updates object with optional searchText or hideCompleted
 // Return value: none
-const setFilters = (newFilters) => {
-    if (newFilters.searchtext)
-    textFilters.searchtext = newFilters.searchtext
+const setFilters = ({searchText, hideCompleted}) => {
+    if (typeof searchText === 'string')
+    textFilters.searchtext = searchTtext
 
-    if (newFilters.hideCompleted)
-    textFilters.hideCompleted = newFilters.hideCompleted
+    if (typeOfhideCompleted === 'boolean')
+    textFilters.hideCompleted = hideCompleted
 }
 
 // Make sure to set up the exports

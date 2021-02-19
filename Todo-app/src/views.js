@@ -8,15 +8,17 @@ const todoDomEL = document.querySelector("#myTodos")
 // Return value: none
 
 const renderTodos = () => {
- 
     todoDomEL.textContent = "";
-    let filteredItems = todos.filter((item) => item.title.toLowerCase().includes(textFilters.searchText));
+    const { searchText, hideCompleted } = textFilters
+    let filteredItems = todos.filter((item) => {
+         const completedMatch = hideCompleted  && item.isDone
+        return item.title.toLowerCase().includes(searchText) && !completedMatch
 
-    if (textFilters.hideCompleted) {
-        //filter out completed items in place (filter and assign back to same variable)
-        filteredItems = filteredItems.filter((item) => !item.isDone);
     }
-    generateTodoDOM(filteredItems);
+    );
+    
+
+generateTodoDOM(filteredItems);
 };
 
 // generateTodoDOM
@@ -50,7 +52,7 @@ const generateTodoDOM = (filteredList) => {
                     let indexToRemove = todos.findIndex((todo) => {
                         return item.uuid == todo.uuid
                     })
-                    
+
                     removeTodo(todos[indexToRemove].uuid)
                     renderTodos()
 
@@ -60,7 +62,7 @@ const generateTodoDOM = (filteredList) => {
                 thisCheckBox.checked = item.isDone
                 thisCheckBox.id = item.uuid
                 thisCheckBox.addEventListener('change', (e) => {
-                    toggleTodo(item.uuid)                    
+                    toggleTodo(item.uuid)
                 })
                 //add our stuff to the parent element and then append it to the DOM
                 containerEl.appendChild(thisCheckBox);
@@ -90,4 +92,4 @@ const generateSummaryDOM = (count) => {
     todoDomEL.appendChild(summaryEl);
 };
 // Make sure to set up the exports
-export { todoDomEL, renderTodos, generateTodoDOM, generateSummaryDOM}
+export { todoDomEL, renderTodos, generateTodoDOM, generateSummaryDOM }
