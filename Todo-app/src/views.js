@@ -46,7 +46,7 @@ const generateTodoDOM = (filteredList) => {
                 const removeButtonEl = document.createElement("button");
 
                 todoTextEl.textContent = item.title;
-                removeButtonEl.textContent = "remove";
+                removeButtonEl.textContent = "delete";
                 removeButtonEl.classList.add('button', 'button--text')
                 removeButtonEl.addEventListener('click', (e) => {
                     let indexToRemove = todos.findIndex((todo) => {
